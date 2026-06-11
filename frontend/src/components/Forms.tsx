@@ -1,17 +1,15 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
+import { Calendar as CalendarIcon, ChevronDown, Search } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Button } from "@/components/ui/button";
 type CounterProps = {
   label: string;
   value: number;
-  min?: number;
   onDecrease: () => void;
   onIncrease: () => void;
 };
@@ -47,8 +45,16 @@ function PassengerCounter({
     </div>
   );
 }
+type HotelFormValues = {
+  destination: string;
+  checkIn?: Date;
+  checkOut?: Date;
+  adults: number;
+  children: number;
+  rooms: number;
+};
 export function HotelForm() {
-  const { register, watch, setValue, handleSubmit } = useForm({
+  const { register, watch, setValue, handleSubmit } = useForm<HotelFormValues>({
     defaultValues: {
       destination: "",
       checkIn: new Date(),
@@ -70,9 +76,9 @@ export function HotelForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="space-y-6 border p-6"
+      className="space-y-6 p-6 w-full"
     >
-      <div className="grid gap-4 md:grid-cols-4">
+      <div className="grid gap-5 md:grid-cols-5 text-gray-500 text-sm">
         <input
           {...register("destination", {
             required: "Destination is required",
@@ -80,56 +86,65 @@ export function HotelForm() {
           placeholder="Destination"
           className="rounded border p-2"
         />
-        <div className="rounded border p-2">
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button variant="none">
+
+        <Popover>
+          <PopoverTrigger asChild>
+            <div className="rounded border p-2 flex items-center gap-2">
                 {checkIn ? checkIn.toDateString() : "Select check-in date"}
-              </Button>
-            </PopoverTrigger>
+                <CalendarIcon size={20}/>
+            </div>
+          </PopoverTrigger>
 
-            <PopoverContent className="p-0">
-              <Calendar
-                mode="single"
-                selected={checkIn}
-                onSelect={(date) => setValue("checkIn", date)}
-              />
-            </PopoverContent>
-          </Popover>
-        </div>
-        <div className="rounded border p-2">
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button variant="default">
-                {checkOut ? checkOut.toDateString() : "Select check-out date"}
-              </Button>
-            </PopoverTrigger>
+          <PopoverContent className="p-0">
+            <Calendar
+              mode="single"
+              selected={checkIn}
+              onSelect={(date) => setValue("checkIn", date)}
+              disabled={(date) => date < new Date()}
+            />
+          </PopoverContent>
+        </Popover>
 
-            <PopoverContent className="p-0">
-              <Calendar
-                mode="single"
-                selected={checkOut}
-                onSelect={(date) => setValue("checkOut", date)}
-              />
-            </PopoverContent>
-          </Popover>
-        </div>
+        <Popover>
+          <PopoverTrigger asChild>
+            <div className="rounded border p-2 flex items-center gap-2">
+                {checkOut ? checkOut.toDateString() : "Select check-out date"}{" "}
+                <CalendarIcon size={20}/>
+
+            </div>
+          </PopoverTrigger>
+
+          <PopoverContent className="p-0">
+            <Calendar
+              mode="single"
+              selected={checkOut}
+              onSelect={(date) => setValue("checkOut", date)}
+              disabled={(date) => {
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+
+                if (!checkIn) return date < today;
+
+                return date < checkIn;
+              }}
+              className="text-color-red"
+            />
+          </PopoverContent>
+        </Popover>
         <div className="relative inline-block w-full">
           <button
             type="button"
             onClick={() => setOpen(!open)}
-            className="w-full rounded border p-2 flex items-center justify-between"
+            className="rounded border p-2 flex items-center justify-between"
           >
             <span>
               {adults} Adult{adults > 1 ? "s" : ""}, {children} Child
               {children > 1 ? "ren" : ""}, {rooms} Room{rooms > 1 ? "s" : ""}
             </span>
 
-            {open ? (
-              <RiArrowDropUpLine size={24} />
-            ) : (
-              <RiArrowDropDownLine size={24} />
-            )}
+            <ChevronDown
+              className={`transition-transform ${open ? "rotate-180" : ""}`}
+            />
           </button>
           {open && (
             <div className="absolute z-10 mt-2 w-72 rounded-lg border bg-white p-4 shadow-lg">
@@ -156,13 +171,14 @@ export function HotelForm() {
             </div>
           )}
         </div>
+        <button
+          type="submit"
+          className="flex items-center gap-2 rounded bg-[var(--primary-color)] px-6 py-2 text-white"
+        >
+          <Search />
+          Search
+        </button>
       </div>
-      <button
-        type="submit"
-        className="rounded bg-blue-600 px-6 py-2 text-white"
-      >
-        Search
-      </button>
     </form>
   );
 }
@@ -197,7 +213,7 @@ export function FlightForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="space-y-6  border p-6"
+      className="space-y-6 p-6 w-full"
     >
       {/* Trip Type */}
       <fieldset>
@@ -270,11 +286,9 @@ export function FlightForm() {
               {infants > 1 ? "s" : ""}
             </span>
 
-            {open ? (
-              <RiArrowDropUpLine size={24} />
-            ) : (
-              <RiArrowDropDownLine size={24} />
-            )}
+            <ChevronDown
+              className={`transition-transform ${open ? "rotate-180" : ""}`}
+            />
           </button>
 
           {open && (

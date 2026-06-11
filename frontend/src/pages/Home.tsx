@@ -1,17 +1,19 @@
 import TopDestinations from "@/components/TopDestinations"
 import CheckAvailability from "../components/CheckAvailability"
 import Navbar from "../components/Navbar"
+import { PackageCard } from "@/components/PackageCard"
 
 function Home() {
   return (
-    <div className="grid grid-cols-[1fr_3fr] w-full h-screen">
-      <div className="bg-gray-100">
+    <div className="grid grid-cols-[1fr_5fr]">
+      <aside className="bg-gray-100">
         <Navbar/>
-      </div>
-      <div className="">
+      </aside>
+      <main className="h-screen overflow-y-auto">
       <CheckAvailability />
-      <TopDestinations/>
-      </div>
+      <TopDestinations  />
+      <PackageCard/>
+      </main>
     </div>
   )
 }
