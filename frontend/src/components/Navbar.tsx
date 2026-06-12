@@ -34,15 +34,15 @@ const Currencies = [
   { label: "EUR", value: "EUR" },
   { label: "GBP", value: "GBP" },
 ];
-const user = {name:"John Doe",avatar:"https://i.pravatar.cc/150?img=3"};
+const user = { name: "John Doe", avatar: "https://i.pravatar.cc/150?img=3" };
 // const user = null;
 const navItems = [
   { label: "Home", icon: House, path: "/" },
   { label: "Destinations", icon: Map, path: "/destinations" },
   { label: "Tours", icon: Mountain, path: "/tours" },
   { label: "Deals", icon: Pyramid, path: "/deals" },
-  {label:"Wishlist", icon: Heart, path:"/wishlist"},
-  {label:"Bookings", icon: Book, path:"/bookings"},
+  { label: "Wishlist", icon: Heart, path: "/wishlist" },
+  { label: "Bookings", icon: Book, path: "/bookings" },
   { label: "Blog", icon: BookOpen, path: "/blog" },
   { label: "About", icon: Users, path: "/about" },
 ];
@@ -52,9 +52,15 @@ function Navbar() {
   const [selectedLanguage, setSelectedLanguage] = useState(Languages[0].value);
   const [selectedCurrency, setSelectedCurrency] = useState(Currencies[0].value);
   return (
-    <nav className="flex flex-col p-4 bg-gray-900 text-gray-300 h-screen">
-      <span className="flex items-center gap-2"><img src={Logo} alt="Logo" className="w-10 mb-6" />Tour & Travel</span>
-            <hr className="my-4 border-t border-gray-300" />
+    <nav
+      className="flex flex-col p-4 bg-gray-900 text-gray-300 h-screen overflow-y-auto scrollbar-thin     scrollbar-thumb-gray-600
+    scrollbar-track-gray-800"
+    >
+      <span className="flex items-center gap-2">
+        <img src={Logo} alt="Logo" className="w-10 mb-6" />
+        Tour & Travel
+      </span>
+      <hr className="my-4 border-t border-gray-300" />
       <section className="space-y-4 flex flex-col justify-between w-full">
         {navItems.map((item) => (
           <Link
@@ -70,17 +76,16 @@ function Navbar() {
         ))}
       </section>
       <hr className="my-4 border-t border-gray-300" />
-      <section className="space-y-4 flex-1 flex-col  justify-between">
+      <section className="space-y-4 flex-1 flex-col justify-between text-sm font-medium">
         <h3>System</h3>
         Languages
         <DropdownMenu open={languageOpen} onOpenChange={setLanguageOpen}>
           <DropdownMenuTrigger asChild>
             <Button
-              variant="outline"
-              className="w-full justify-between text-black"
+              className={`w-full border-1 border-white bg-[rgb(var(--primary-rgb)/0.1)] justify-between text-white
+               hover:bg-[rgb(var(--primary-rgb)/0.4)] hover:text-white focus-visible:ring-0 data-[state=open]:bg-[rgb(var(--primary-rgb)/0.4)] data-[state=open]:border-white`}
             >
               {selectedLanguage}
-
               <ChevronDown
                 className={`transition-transform ${
                   languageOpen ? "rotate-180" : ""
@@ -88,11 +93,22 @@ function Navbar() {
               />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            {Languages.map((language) => (
+          <DropdownMenuContent className="!p-0 bg-gray-600">
+            {Languages.map((language, index) => (
               <DropdownMenuItem
                 key={language.value}
                 onClick={() => setSelectedLanguage(language.value)}
+                   className={`rounded-none !text-white text-sm font-medium cursor-pointer
+  ${index === 0 ? "border-none" : "border-t border-gray-300"}
+
+  ${
+    language.value === selectedLanguage
+      ?"bg-[rgb(var(--primary-rgb)/0.8)]"
+      : "bg-[rgb(var(--primary-rgb)/0.2)]"
+  }
+
+  hover:!bg-[rgb(var(--primary-rgb)/0.8)]
+`}
               >
                 {language.label}
               </DropdownMenuItem>
@@ -103,8 +119,8 @@ function Navbar() {
         <DropdownMenu open={currencyOpen} onOpenChange={setCurrencyOpen}>
           <DropdownMenuTrigger asChild>
             <Button
-              variant="outline"
-              className="w-full justify-between text-black"
+              className={`w-full border-1 border-white bg-[rgb(var(--primary-rgb)/0.1)] justify-between text-white
+               hover:bg-[rgb(var(--primary-rgb)/0.4)] hover:text-white focus-visible:ring-0 data-[state=open]:bg-[rgb(var(--primary-rgb)/0.4)] data-[state=open]:border-white`}
             >
               {selectedCurrency}
 
@@ -116,11 +132,22 @@ function Navbar() {
             </Button>
           </DropdownMenuTrigger>
 
-          <DropdownMenuContent>
-            {Currencies.map((currency) => (
+          <DropdownMenuContent className="!p-0 bg-gray-600">
+            {Currencies.map((currency, index) => (
               <DropdownMenuItem
                 key={currency.value}
                 onClick={() => setSelectedCurrency(currency.value)}
+     className={`rounded-none !text-white text-sm font-medium cursor-pointer
+  ${index === 0 ? "border-none" : "border-t border-gray-300"}
+
+  ${
+    currency.value === selectedCurrency
+      ?"bg-[rgb(var(--primary-rgb)/0.8)]"
+      : "bg-[rgb(var(--primary-rgb)/0.2)]"
+  }
+
+  hover:!bg-[rgb(var(--primary-rgb)/0.8)]
+`}
               >
                 {currency.label}
               </DropdownMenuItem>
@@ -128,10 +155,10 @@ function Navbar() {
           </DropdownMenuContent>
         </DropdownMenu>
         <Link to="/settings" className="flex items-center gap-2">
-        <Button variant="navActive" className="w-full cursor-pointer">
-          <Settings />
-          Settings
-        </Button>
+          <Button variant="navActive" className="w-full cursor-pointer">
+            <Settings />
+            Settings
+          </Button>
         </Link>
       </section>
       <hr className="my-4 border-t border-gray-300" />

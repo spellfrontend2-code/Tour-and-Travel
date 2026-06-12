@@ -21,7 +21,8 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
         none: "bg-transparent border-none p-0 hover:bg-transparent w-full hover:text-inherit",
      navActive: "w- full hover:bg-[var(--primary-color)] justify-start hover:text-white "
-      },
+    
+    },
       size: {
         default:
           "h-8 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
