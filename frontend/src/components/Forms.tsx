@@ -325,7 +325,7 @@ export function FlightForm() {
         </div>
               <button
         type="submit"
-        className="rounded bg-blue-600 px-6 py-2 text-white flex items-center gap-2"
+        className="rounded px-6 py-2 text-white flex items-center gap-2 bg-[var(--primary-color)]"
       >
         <SearchIcon/>
         Search Flights

@@ -7,6 +7,7 @@ import { Masonry } from "masonic";
 import { Button } from './ui/button';
 import { MapPin } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useMemo } from 'react';
 const Destinations = [
   {
     id: 1,
@@ -59,6 +60,11 @@ const Destinations = [
 ];
 function TopDestinations() {
   const navigate=useNavigate();
+    const columnWidth = useMemo(() => {
+    if (window.innerWidth < 640) return 160;
+    if (window.innerWidth < 1024) return 220;
+    return 280;
+  }, []);
   return (
 <div className="relative p-4 mt-15 cursor-pointer">
   <p className="text-xl text-center font-bold mb-4 text-[var(--primary-color)]">Top Destinations</p>
@@ -67,7 +73,7 @@ function TopDestinations() {
       <Masonry
         items={Destinations}
         columnGutter={12}
-        columnWidth={300}
+        columnWidth={columnWidth}
         className='min-h-[50px]'
         render={({ data }) => (
           <div className="group relative mb-3 overflow-hidden rounded-xl hover:shadow-xl"  onClick={()=>navigate(`/destinations/${data.id}`)}

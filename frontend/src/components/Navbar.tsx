@@ -2,6 +2,8 @@ import {
   Book,
   BookOpen,
   ChevronDown,
+  CircleChevronRight,
+  Globe,
   Heart,
   House,
   LogIn,
@@ -15,7 +17,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -46,148 +48,193 @@ const navItems = [
   { label: "Blog", icon: BookOpen, path: "/blog" },
   { label: "About", icon: Users, path: "/about" },
 ];
-function Navbar() {
+interface NavbarProps {
+  navbarCollapse: boolean;
+  setNavbarCollapse: React.Dispatch<React.SetStateAction<boolean>>;
+}
+function Navbar({ navbarCollapse, setNavbarCollapse }: NavbarProps) {
+  const navRef = useRef(null);
   const [languageOpen, setLanguageOpen] = useState(false);
   const [currencyOpen, setCurrencyOpen] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState(Languages[0].value);
   const [selectedCurrency, setSelectedCurrency] = useState(Currencies[0].value);
   return (
-    <nav
-      className="flex flex-col p-4 bg-gray-900 text-gray-300 h-screen overflow-y-auto scrollbar-thin     scrollbar-thumb-gray-600
-    scrollbar-track-gray-800"
-    >
-      <span className="flex items-center gap-2">
-        <img src={Logo} alt="Logo" className="w-10 mb-6" />
-        Tour & Travel
-      </span>
-      <hr className="my-4 border-t border-gray-300" />
-      <section className="space-y-4 flex flex-col justify-between w-full">
-        {navItems.map((item) => (
-          <Link
-            key={item.label}
-            to={item.path}
-            className="flex items-center gap-2 w-full"
+    <div className={`relative  h-screen  ${navbarCollapse ? "w-20" : "w-62"}`}>
+      <nav
+        ref={navRef}
+        className={` flex flex-col p-4 bg-gray-900 text-gray-300 h-screen overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600
+    scrollbar-track-gray-800 transition-all duration-300 w-full`}
+      >
+        <div className="flex items-center gap-2">
+          <img src={Logo} className="w-10" />
+
+          <span
+            className={`
+      text-2xl font-bold whitespace-nowrap
+      overflow-hidden transition-all duration-300
+      ${navbarCollapse ? "w-0 opacity-0" : "w-auto opacity-100"}
+    `}
           >
-            <Button variant="navActive" className="w-full cursor-pointer">
-              <item.icon size={20} />
-              {item.label}
-            </Button>
-          </Link>
-        ))}
-      </section>
-      <hr className="my-4 border-t border-gray-300" />
-      <section className="space-y-4 flex-1 flex-col justify-between text-sm font-medium">
-        <h3>System</h3>
-        Languages
-        <DropdownMenu open={languageOpen} onOpenChange={setLanguageOpen}>
-          <DropdownMenuTrigger asChild>
-            <Button
-              className={`w-full border-1 border-white bg-[rgb(var(--primary-rgb)/0.1)] justify-between text-white
-               hover:bg-[rgb(var(--primary-rgb)/0.4)] hover:text-white focus-visible:ring-0 data-[state=open]:bg-[rgb(var(--primary-rgb)/0.4)] data-[state=open]:border-white`}
+            Tour & Travel
+          </span>
+        </div>
+        <hr className="my-4 border-t border-gray-300" />
+
+        <section className="space-y-4 flex flex-col justify-between w-full">
+          {navItems.map((item) => (
+            <Link
+              key={item.label}
+              to={item.path}
+              className="flex items-center gap-2 w-full"
             >
-              {selectedLanguage}
-              <ChevronDown
-                className={`transition-transform ${
-                  languageOpen ? "rotate-180" : ""
-                }`}
-              />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="!p-0 bg-gray-600">
-            {Languages.map((language, index) => (
-              <DropdownMenuItem
-                key={language.value}
-                onClick={() => setSelectedLanguage(language.value)}
-                   className={`rounded-none !text-white text-sm font-medium cursor-pointer
+              <Button
+                variant="navActive"
+                className="w-full cursor-pointer title={item.label}
+"
+              >
+                <item.icon size={20} />{" "}
+                <p className={`${navbarCollapse ? "hidden" : "block"}`}>
+                  {item.label}
+                </p>
+              </Button>
+            </Link>
+          ))}
+        </section>
+        <hr className="my-4 border-t border-gray-300" />
+        <section className="space-y-4 flex-1 flex-col justify-between text-sm font-medium">
+          <h3>System</h3>
+          Languages
+          <DropdownMenu open={languageOpen} onOpenChange={setLanguageOpen}>
+            <DropdownMenuTrigger asChild>
+              <Button
+                className={`w-full border-1 border-white bg-[rgb(var(--primary-rgb)/0.1)] justify-between text-white
+               hover:bg-[rgb(var(--primary-rgb)/0.4)] hover:text-white focus-visible:ring-0 data-[state=open]:bg-[rgb(var(--primary-rgb)/0.4)] data-[state=open]:border-white`}
+              >
+                {selectedLanguage}
+                <ChevronDown
+                  className={`transition-transform ${
+                    languageOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="!p-0 bg-gray-600">
+              {Languages.map((language, index) => (
+                <DropdownMenuItem
+                  key={language.value}
+                  onClick={() => setSelectedLanguage(language.value)}
+                  className={`rounded-none !text-white text-sm font-medium cursor-pointer
   ${index === 0 ? "border-none" : "border-t border-gray-300"}
 
   ${
     language.value === selectedLanguage
-      ?"bg-[rgb(var(--primary-rgb)/0.8)]"
+      ? "bg-[rgb(var(--primary-rgb)/0.8)]"
       : "bg-[rgb(var(--primary-rgb)/0.2)]"
   }
 
   hover:!bg-[rgb(var(--primary-rgb)/0.8)]
 `}
-              >
-                {language.label}
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
-        Currency
-        <DropdownMenu open={currencyOpen} onOpenChange={setCurrencyOpen}>
-          <DropdownMenuTrigger asChild>
-            <Button
-              className={`w-full border-1 border-white bg-[rgb(var(--primary-rgb)/0.1)] justify-between text-white
+                >
+                  {language.label}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+          Currency
+          <DropdownMenu open={currencyOpen} onOpenChange={setCurrencyOpen}>
+            <DropdownMenuTrigger asChild>
+              <Button
+                className={`w-full border-1 border-white bg-[rgb(var(--primary-rgb)/0.1)] justify-between text-white
                hover:bg-[rgb(var(--primary-rgb)/0.4)] hover:text-white focus-visible:ring-0 data-[state=open]:bg-[rgb(var(--primary-rgb)/0.4)] data-[state=open]:border-white`}
-            >
-              {selectedCurrency}
+              >
+                {selectedCurrency}
 
-              <ChevronDown
-                className={`transition-transform ${
-                  currencyOpen ? "rotate-180" : ""
-                }`}
-              />
-            </Button>
-          </DropdownMenuTrigger>
+                <ChevronDown
+                  className={`transition-transform ${
+                    currencyOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </Button>
+            </DropdownMenuTrigger>
 
-          <DropdownMenuContent className="!p-0 bg-gray-600">
-            {Currencies.map((currency, index) => (
-              <DropdownMenuItem
-                key={currency.value}
-                onClick={() => setSelectedCurrency(currency.value)}
-     className={`rounded-none !text-white text-sm font-medium cursor-pointer
+            <DropdownMenuContent className="!p-0 bg-gray-600">
+              {Currencies.map((currency, index) => (
+                <DropdownMenuItem
+                  key={currency.value}
+                  onClick={() => setSelectedCurrency(currency.value)}
+                  className={`rounded-none !text-white text-sm font-medium cursor-pointer
   ${index === 0 ? "border-none" : "border-t border-gray-300"}
 
   ${
     currency.value === selectedCurrency
-      ?"bg-[rgb(var(--primary-rgb)/0.8)]"
+      ? "bg-[rgb(var(--primary-rgb)/0.8)]"
       : "bg-[rgb(var(--primary-rgb)/0.2)]"
   }
 
   hover:!bg-[rgb(var(--primary-rgb)/0.8)]
 `}
-              >
-                {currency.label}
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
-        <Link to="/settings" className="flex items-center gap-2">
-          <Button variant="navActive" className="w-full cursor-pointer">
-            <Settings />
-            Settings
-          </Button>
-        </Link>
-      </section>
-      <hr className="my-4 border-t border-gray-300" />
-      <section className="space-y-4">
-        {user ? (
-          <>
-            <Link to="/profile" className="flex items-center gap-2">
-              {user.avatar ? (
-                <img
-                  src={user.avatar}
-                  alt={user.name}
-                  className="w-8 h-8 rounded-full"
-                />
-              ) : (
-                <User />
-              )}
-              <span>{user?.name}</span>
-            </Link>
-            <Link to="/logout" className="flex items-center gap-2 text-red-500">
-              <LogOut /> Logout
-            </Link>
-          </>
-        ) : (
-          <Link to="/login" className="flex items-center gap-2">
-            <LogIn /> Login
+                >
+                  {currency.label}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <Link to="/settings" className="flex items-center gap-2">
+            <Button variant="navActive" className="w-full cursor-pointer">
+              <Settings size={20} />
+              {!navbarCollapse && <p>Settings</p>}
+            </Button>
           </Link>
-        )}
-      </section>
-    </nav>
+        </section>
+        <hr className="my-4 border-t border-gray-300" />
+        <section className="space-y-4">
+          {user ? (
+            <>
+              <Link to="/profile" className="flex items-center gap-2">
+                {user.avatar ? (
+                  <img
+                    src={user.avatar}
+                    alt={user.name}
+                    className="w-8 h-8 rounded-full"
+                  />
+                ) : (
+                  <User size={20} />
+                )}
+                <span className={`${navbarCollapse ? "hidden" : "block"}`}>
+                  {user?.name}
+                </span>
+              </Link>
+              <Link
+                to="/logout"
+                className="flex items-center gap-2 text-red-500"
+              >
+                <LogOut size={20} />{" "}
+                <p className={`${navbarCollapse ? "hidden" : "block"}`}>
+                  Log Out
+                </p>
+              </Link>
+            </>
+          ) : (
+            <Link to="/login" className="flex items-center gap-2">
+              <LogIn size={20} />{" "}
+              <p className={`${navbarCollapse ? "hidden" : "block"}`}>Login</p>
+            </Link>
+          )}
+        </section>
+      </nav>
+      <div
+        className="absolute top-4 -right-3
+  bg-gray-800 rounded-full p-1 cursor-pointer shadow"
+        onClick={() => setNavbarCollapse(!navbarCollapse)}
+      >
+        <CircleChevronRight
+          className={`transition-transform duration-300 text-black fill-gray-400 hover:text-white ${
+            navbarCollapse ? "" : "rotate-180"
+          }`}
+          size={20}
+        />
+      </div>
+    </div>
   );
 }
 

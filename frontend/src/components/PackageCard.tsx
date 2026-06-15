@@ -130,7 +130,8 @@ export function PackageCard() {
           <div key={index} className="flex flex-col rounded-lg m-10 cursor-pointer text-sm w-[350px] h-[500px] border-2 hover:shadow-lg">
           <div className="relative h-1/2 overflow-hidden bg-red-400 rounded-t-lg">
             <img src={pkg.image} className="h-full w-full  transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg" />
- <Heart size={18} className="absolute top-2 right-2 text-red-600 hover:fill-red-600"/>
+ 
+ <div className="absolute top-2 right-2 bg-gray-300 p-1 rounded-xl"><Heart size={18} className=" text-gray-500 hover:fill-red-600 hover:text-red-600"/></div>
  </div>        
    
             <div className="h-2/3 flex flex-col items-left justify-around p-2">
