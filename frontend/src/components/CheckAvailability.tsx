@@ -46,6 +46,18 @@ function CheckAvailability() {
 useEffect(() => {
 !isSticky && setShowTabContent(true)}, [isSticky]);
 
+useEffect(() => {
+  const updatePosition = () => {
+    if (containerRef.current) {
+      const rect = containerRef.current.getBoundingClientRect();
+      containerRef.current.style.setProperty("--sticky-left", `${rect.left + rect.width / 4}px`);
+      containerRef.current.style.setProperty("--sticky-width", `${rect.width / 2}px`);
+    }
+  };
+  updatePosition();
+  window.addEventListener("resize", updatePosition);
+  return () => window.removeEventListener("resize", updatePosition);
+}, [])
 const containerRef=useRef(null);
   return (
     <div className="m-5 relative " ref={containerRef}>
@@ -76,15 +88,7 @@ const containerRef=useRef(null);
       ? "fixed top-0 "
       : "absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-[90%]"
   }`}
-style={
-  isSticky && containerRef.current
-    ? {
-        left: containerRef.current.getBoundingClientRect().left +
-              containerRef.current.getBoundingClientRect().width / 4,
-        width: containerRef.current.getBoundingClientRect().width / 2,
-      }
-    : {}
-}
+style={isSticky ? { left: "var(--sticky-left)", width: "var(--sticky-width)" } : {}}
 >
         <div className={`flex  rounded-t-lg border border-gray-300 border-b-0 bg-white text-sm font-medium text-gray-600 `}>
           {tabs.map((tab, index) => (

@@ -3,7 +3,6 @@ import {
   BookOpen,
   ChevronDown,
   CircleChevronRight,
-  Globe,
   Heart,
   House,
   LogIn,

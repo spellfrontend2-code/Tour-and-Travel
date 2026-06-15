@@ -21,7 +21,7 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
         none: "bg-transparent border-none p-0 hover:bg-transparent w-full hover:text-inherit",
      navActive: "w- full hover:bg-[var(--primary-color)] justify-start hover:text-white "
-    
+     ,viewButton:"w-full text-white bg-gray-800 b-2 border-gray-700 cursor-pointer hover:bg-gray-700 hover:text-white"
     },
       size: {
         default:
