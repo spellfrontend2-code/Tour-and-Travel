@@ -66,10 +66,7 @@ function TopDestinations() {
     return 280;
   }, []);
   return (
-<div className="relative p-4 mt-15 cursor-pointer">
-  <p className="text-xl text-center font-bold mb-4 text-[var(--primary-color)]">Top Destinations</p>
-     <p className='m-2 text-5xl [font-family:var(--font-times)] font-bold text-center text-gray-700' >Find your Best Destination</p>
-     
+<div className="relative cursor-pointer">
       <Masonry
         items={Destinations}
         columnGutter={12}

@@ -53,7 +53,7 @@ function DestinationCard() {
                 src={dest.image}
                 className="h-full w-full  transition-transform duration-300 ease-in-out group-hover:scale-105 hover:shadow-lg"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent" />
               <div className="absolute top-2 right-2 bg-gray-300 p-1 rounded-xl">
                 <Heart
                   size={18}
@@ -66,14 +66,14 @@ function DestinationCard() {
                 >{dest.tours} Tours</p>
               </div>
             </div>
-            <div className="h-1/2 flex flex-col items-left justify-between text-gray-300 p-3 bg-gray-900 rounded-b-lg">
+            <div className="h-1/2 flex flex-col items-left justify-between text-gray-800 p-3 rounded-b-lg">
             <div className="flex flex-col gap-4">
-            <div className="flex flex-col">
-              <div className="flex justify-between"><p className="text-[var(--primary-color)] text-xl font-bold">{dest.name}</p><div className="flex items-center gap-2 border-1 border-yellow-800 rounded-lg p-1 text-xs font-bold text-yellow-500 bg-yellow-100/10"><Star className="fill-yellow-500" size={15}/>{dest.rating}</div></div>
+            <div className="flex flex-col ">
+              <div className="flex justify-between "><p className="text-[var(--primary-color)] text-xl font-bold">{dest.name}</p><Button variant="ratingButton" className="flex rounded-lg p-1 text-xs font-bold text-yellow-300"><Star className="fill-yellow-300" size={15}/>{dest.rating}</Button></div>
               <p className="flex items-center gap-1 text-sm font-medium">
                 <MapPin size={20} className="text-[var(--primary-color)]"/>{dest.region}, {dest.country}
               </p></div>
-              <p className="line-clamp-3 ">{dest.description}</p></div>
+              <p className="line-clamp-3">{dest.description}</p></div>
               <Button variant="viewButton"
                 onClick={() => navigate(`/destinations/${dest.id}`)}
               >View Available Packages</Button>

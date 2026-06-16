@@ -26,41 +26,40 @@ const tabs = [
 ];
 function CheckAvailability() {
   const [activeTab, setActiveTab] = useState(tabs[0]);
-  const [isSticky, setIsSticky] = useState(false);
   const [showTabContent,setShowTabContent]=useState(true)
   const heroRef=useRef(null);
-  useEffect(() =>{
-    const observer=new IntersectionObserver(([entry])=>{
-      setIsSticky(!entry.isIntersecting);
-    },{
-      threshold:0.1,
-    })
-    if(heroRef.current){
-      observer.observe(heroRef.current);
-    }
-    return () => {
-    observer.disconnect();
-    }
-  },[])
+//   useEffect(() =>{
+//     const observer=new IntersectionObserver(([entry])=>{
+//       setIsSticky(!entry.isIntersecting);
+//     },{
+//       threshold:0.1,
+//     })
+//     if(heroRef.current){
+//       observer.observe(heroRef.current);
+//     }
+//     return () => {
+//     observer.disconnect();
+//     }
+//   },[])
 
-useEffect(() => {
-!isSticky && setShowTabContent(true)}, [isSticky]);
+// useEffect(() => {
+// !isSticky && setShowTabContent(true)}, [isSticky]);
 
-useEffect(() => {
-  const updatePosition = () => {
-    if (containerRef.current) {
-      const rect = containerRef.current.getBoundingClientRect();
-      containerRef.current.style.setProperty("--sticky-left", `${rect.left + rect.width / 4}px`);
-      containerRef.current.style.setProperty("--sticky-width", `${rect.width / 2}px`);
-    }
-  };
-  updatePosition();
-  window.addEventListener("resize", updatePosition);
-  return () => window.removeEventListener("resize", updatePosition);
-}, [])
-const containerRef=useRef(null);
+// useEffect(() => {
+//   const updatePosition = () => {
+//     if (containerRef.current) {
+//       const rect = containerRef.current.getBoundingClientRect();
+//       containerRef.current.style.setProperty("--sticky-left", `${rect.left + rect.width / 4}px`);
+//       containerRef.current.style.setProperty("--sticky-width", `${rect.width / 2}px`);
+//     }
+//   };
+//   updatePosition();
+//   window.addEventListener("resize", updatePosition);
+//   return () => window.removeEventListener("resize", updatePosition);
+// }, [])
+// const containerRef=useRef(null);
   return (
-    <div className="m-5 relative " ref={containerRef}>
+    <div className="m-5 relative ">
       <div ref={heroRef}>
       <img
         src={hero}
@@ -83,13 +82,7 @@ const containerRef=useRef(null);
       </div>
       </div>
   <div
-  className={`rounded z-10 ${
-    isSticky
-      ? "fixed top-0 "
-      : "absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-[90%]"
-  }`}
-style={isSticky ? { left: "var(--sticky-left)", width: "var(--sticky-width)" } : {}}
->
+  className="rounded z-10 absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-[90%]">
         <div className={`flex  rounded-t-lg border border-gray-300 border-b-0 bg-white text-sm font-medium text-gray-600 `}>
           {tabs.map((tab, index) => (
             <button
@@ -101,9 +94,6 @@ style={isSticky ? { left: "var(--sticky-left)", width: "var(--sticky-width)" } :
               {tab.name}
             </button>
           ))}
-         {isSticky && <div onClick={()=>setShowTabContent(!showTabContent)} className="flex items-center"><ChevronDown size={15}       className={`transition-transform duration-300 ${
-        !showTabContent ? "rotate-180" : ""
-      }`}/></div>}
         </div>
         <div className={`bg-white border border-gray-300 w-full h-full rounded-b-lg ${showTabContent ? "block" : "hidden"}`}>
           {activeTab.content}

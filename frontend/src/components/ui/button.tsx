@@ -20,9 +20,11 @@ const buttonVariants = cva(
           "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
         link: "text-primary underline-offset-4 hover:underline",
         none: "bg-transparent border-none p-0 hover:bg-transparent w-full hover:text-inherit",
-     navActive: "w- full hover:bg-[var(--primary-color)] justify-start hover:text-white "
-     ,viewButton:"w-full text-white bg-gray-800 b-2 border-gray-700 cursor-pointer hover:bg-gray-700 hover:text-white"
-    },
+     navActive: "w- full hover:bg-[var(--primary-color)] justify-start hover:text-white ",
+     viewButton:"w-full text-white bg-gray-800 b-2 border-gray-700 cursor-pointer hover:bg-gray-700 hover:text-white",
+greenTransparentButton:"pointer-events-none border-1 border-[rgb(var(--primary-rgb)/0.3)] rounded-lg p-1 text-xs font-bold text-[var(--primary-color)] bg-[rgb(var(--primary-rgb)/0.1)]"  ,
+ratingButton:"pointer-events-none border-1 border-yellow-300 rounded-lg p-1 text-xs font-bold text-yellow-300 bg-yellow-100/10",
+greenSolidButton:"pointer-events-none p-1 bg-[var(--primary-color)] font-bold text-white rounded-lg"},
       size: {
         default:
           "h-8 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",

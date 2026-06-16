@@ -116,15 +116,10 @@ const Packages = [
       "Experience the iconic trek to Everest Base Exence the iconic trek to Everest Base Camp. Experience the iconic trek to Everest Base Camp. Experience the iconic trek to Everest Base Camp.",
   },
 ];
-export function PackageCard() {
+ function TourPackageCard() {
   const navigate = useNavigate();
   return (
-    <div className=" m-10">
-      <p className="text-[var(--primary-color)] text-sm font-medium">
-        Popular Packages
-      </p>
-      <p className="text-3xl font-bold">Tour & Trek Packages</p>
-
+    
       <div className="flex w-full flex-wrap">
         {Packages.map((pkg, index) => (
           <div
@@ -151,12 +146,12 @@ export function PackageCard() {
                   {pkg.packages.map((p, i) => (
                     <div
                       key={i}
-                      className="flex flex-col text-center justify-between rounded-lg p-2 bg-white border-2 border-gray-200 w-[120px] hover:border-[rgb(var(--primary-rgb)/0.3)] "
+                      className="flex flex-col text-center justify-between rounded-lg p-2 bg-white border-2 border-gray-200 w-[120px] hover:border-[rgb(var(--primary-rgb)/0.3)] hover:text-[var(--primary-color)]"
                     >
                       <p className="text-xs font-bold text-gray-500">
                         {p.name}
                       </p>
-                      <p className="font-bold hover:text-[var(--primary-color)]">
+                      <p className="font-bold ">
                         {p.currency}
                         {p.price}
                       </p>
@@ -189,11 +184,11 @@ export function PackageCard() {
                 </div>
               </div>
               {/* Button */}
-              <div className="w-full">
+              <div className="w-full my-2">
                 <Button
                 className="w-full"
                   variant="default"
-                  onClick={() => navigate(`/packages/${pkg.id}`)}
+                  onClick={() => navigate(`/tours/${pkg.id}`)}
                 >
                   View details
                   <ArrowRight />
@@ -203,6 +198,8 @@ export function PackageCard() {
           </div>
         ))}
       </div>
-    </div>
+   
   );
 }
+
+export default TourPackageCard;

@@ -44,7 +44,7 @@ const navItems = [
   { label: "Deals", icon: Pyramid, path: "/deals" },
   { label: "Wishlist", icon: Heart, path: "/wishlist" },
   { label: "Bookings", icon: Book, path: "/bookings" },
-  { label: "Blog", icon: BookOpen, path: "/blog" },
+  { label: "Blog", icon: BookOpen, path: "/blogs" },
   { label: "About", icon: Users, path: "/about" },
 ];
 interface NavbarProps {
@@ -122,9 +122,7 @@ function Navbar({ navbarCollapse, setNavbarCollapse }: NavbarProps) {
                 <DropdownMenuItem
                   key={language.value}
                   onClick={() => setSelectedLanguage(language.value)}
-                  className={`rounded-none !text-white text-sm font-medium cursor-pointer
-  ${index === 0 ? "border-none" : "border-t border-gray-300"}
-
+                  className={`rounded-none !text-white text-sm font-medium cursor-pointer ${index === 0 ? "border-none" : "border-t border-gray-300"}
   ${
     language.value === selectedLanguage
       ? "bg-[rgb(var(--primary-rgb)/0.8)]"

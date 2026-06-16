@@ -87,15 +87,11 @@ const Blogs = [
       "The Everest region is not just about mountains; it is home to the Sherpa community, known for their hospitality and mountaineering skills...",
   },
 ];
-export function BlogCard() {
+function BlogCard() {
   const navigate = useNavigate();
   return (
     <div className=" m-10">
-      <p className="text-[var(--primary-color)] text-sm font-medium">
-        Popular Blogs
-      </p>
-      <p className="text-3xl font-bold">Tour & Trek Blogs</p>
-
+   
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
         {Blogs.map((blog, index) => (
           <div key={index} className="flex flex-col rounded-lg m-10 cursor-pointer text-sm w-[350px] h-[400px] border-2 hover:shadow-lg">
@@ -143,7 +139,7 @@ export function BlogCard() {
                   {blog.author}
                 </p>
 
-                <Button variant="none" className="text-[rgb(var(--primary-rgb)/0.7)] hover:text-[var(--primary-color)] cursor-pointer" onClick={() => navigate(`/${blog.id}`)}>
+                <Button variant="none" className="text-[rgb(var(--primary-rgb)/0.7)] hover:text-[var(--primary-color)] cursor-pointer" onClick={() => navigate(`/blogs/${blog.id}`)}>
                   Read Article
                   <ArrowRight />
                 </Button>
@@ -155,3 +151,4 @@ export function BlogCard() {
     </div>
   );
 }
+export default BlogCard;
