@@ -120,11 +120,11 @@ const Packages = [
   const navigate = useNavigate();
   return (
     
-      <div className="flex w-full flex-wrap">
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 ">
         {Packages.map((pkg, index) => (
           <div
             key={index}
-            className="flex flex-col rounded-lg m-10 cursor-pointer text-sm w-[350px] h-[400px] border-2 hover:shadow-lg"
+            className="flex flex-col rounded-lg m-10 cursor-pointer text-sm  border-2 hover:shadow-lg"
           >
             <div className="relative h-1/2 overflow-hidden rounded-t-lg">
               <img

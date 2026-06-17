@@ -90,11 +90,11 @@ const Blogs = [
 function BlogCard() {
   const navigate = useNavigate();
   return (
-    <div className=" m-10">
+    <div className=" ">
    
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2">
         {Blogs.map((blog, index) => (
-          <div key={index} className="flex flex-col rounded-lg m-10 cursor-pointer text-sm w-[350px] h-[400px] border-2 hover:shadow-lg">
+          <div key={index} className="flex flex-col rounded-lg m-10 cursor-pointer text-sm border-2 hover:shadow-lg">
             <div className="relative h-1/2 overflow-hidden bg-red-400 rounded-t-lg">
               <img
                 src={blog.image}
@@ -133,15 +133,14 @@ function BlogCard() {
                   </div>
               
 
-              <div className="flex text-gray-400 justify-between border-t-1">
-                <p className="flex items-center gap-2">
+              <div className="flex w-full text-gray-400 justify-between border-t-1">
+                <p className="flex w-1/2 items-center gap-2 ">
                   <User />
                   {blog.author}
                 </p>
 
-                <Button variant="none" className="text-[rgb(var(--primary-rgb)/0.7)] hover:text-[var(--primary-color)] cursor-pointer" onClick={() => navigate(`/blogs/${blog.id}`)}>
-                  Read Article
-                  <ArrowRight />
+                <Button variant="none" className="text-[rgb(var(--primary-rgb)/0.7)]  4 w-1/2 hover:text-[var(--primary-color)] cursor-pointer" onClick={() => navigate(`/blogs/${blog.id}`)}>
+                  Read Article <ArrowRight />
                 </Button>
               </div>
             </div>

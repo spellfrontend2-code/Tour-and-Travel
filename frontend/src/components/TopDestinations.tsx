@@ -7,7 +7,7 @@ import { Masonry } from "masonic";
 import { Button } from './ui/button';
 import { MapPin } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 const Destinations = [
   {
     id: 1,
@@ -60,25 +60,38 @@ const Destinations = [
 ];
 function TopDestinations() {
   const navigate=useNavigate();
-    const columnWidth = useMemo(() => {
+  function useColumnWidth() {
+  const getWidth = () => {
     if (window.innerWidth < 640) return 160;
     if (window.innerWidth < 1024) return 220;
     return 280;
+  };
+    const [width, setWidth] = useState(getWidth());
+
+  useEffect(() => {
+    const handleResize = () => setWidth(getWidth());
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  return width;
+}
+const columnWidth = useColumnWidth();
   return (
-<div className="relative cursor-pointer">
+<div className="relative cursor-pointer items-center">
       <Masonry
         items={Destinations}
-        columnGutter={12}
+        columnGutter={12} 
         columnWidth={columnWidth}
-        className='min-h-[50px]'
+        className=' w-full'
+        overscanBy={5}
         render={({ data }) => (
-          <div className="group relative mb-3 overflow-hidden rounded-xl hover:shadow-xl"  onClick={()=>navigate(`/destinations/${data.id}`)}
+          <div className="group  relative mb-3 overflow-hidden rounded-xl hover:shadow-lg"  onClick={()=>navigate(`/destinations/${data.id}`)}
 >
             <img
               src={data.image}
               alt={`Destination ${data.id + 1}`}
-              className="w-full rounded-xl shadow-sm transition-transform duration-300 ease-in-out group-hover:scale-105 hover:shadow-lg"
+              className="w-full h-auto rounded-xl shadow-sm transition-transform duration-300 ease-in-out group-hover:scale-105 hover:shadow-lg"
             />
               <div
     className="
@@ -88,7 +101,7 @@ function TopDestinations() {
       transition-opacity duration-300
       flex items-center justify-center
       bg-black/40
-      bottom-0
+  
     "
   >
     <div className='absolute bottom-0 text-left p-2 '><p className="text-lg font-medium text-white">{data.name}</p>
@@ -98,7 +111,7 @@ function TopDestinations() {
           </div>
         )}
       />
-      <div className='flex justify-center'>
+      <div className='flex justify-center  mt-6 sm:mt-10'>
       <Button className=' bg-[var(--primary-color)] hover:bg-[rgb(var(--primary-rgb)/0.3)] hover:text-[var(--primary-color)] hover:cursor-pointer'><MapPin/>View All Destinations</Button>
     </div></div>
   );

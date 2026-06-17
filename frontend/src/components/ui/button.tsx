@@ -1,8 +1,8 @@
-import * as React from "react"
-import { cva, type VariantProps } from "class-variance-authority"
-import { Slot } from "radix-ui"
+import * as React from "react";
+import { cva, type VariantProps } from "class-variance-authority";
+import { Slot } from "radix-ui";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
   "group/button inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
@@ -20,11 +20,20 @@ const buttonVariants = cva(
           "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
         link: "text-primary underline-offset-4 hover:underline",
         none: "bg-transparent border-none p-0 hover:bg-transparent w-full hover:text-inherit",
-     navActive: "w- full hover:bg-[var(--primary-color)] justify-start hover:text-white ",
-     viewButton:"w-full text-white bg-gray-800 b-2 border-gray-700 cursor-pointer hover:bg-gray-700 hover:text-white",
-greenTransparentButton:"pointer-events-none border-1 border-[rgb(var(--primary-rgb)/0.3)] rounded-lg p-1 text-xs font-bold text-[var(--primary-color)] bg-[rgb(var(--primary-rgb)/0.1)]"  ,
-ratingButton:"pointer-events-none border-1 border-yellow-300 rounded-lg p-1 text-xs font-bold text-yellow-300 bg-yellow-100/10",
-greenSolidButton:"pointer-events-none p-1 bg-[var(--primary-color)] font-bold text-white rounded-lg"},
+        navActive:
+          "w- full hover:text-white hover:bg-gray-700/60 justify-start",
+        viewButton:
+          "w-full text-white bg-gray-800 b-2 border-gray-700 cursor-pointer hover:bg-gray-700 hover:text-white",
+        greenTransparentButton:
+          "pointer-events-none border-1 border-[rgb(var(--primary-rgb)/0.3)] rounded-xl p-1 text-xs font-bold text-[var(--primary-color)] bg-[rgb(var(--primary-rgb)/0.1)]",
+        ratingButton:
+          "pointer-events-none border-1 border-yellow-300 rounded-xl p-1 text-xs font-bold text-yellow-300 bg-yellow-100/10",
+        greenSolidButton:
+          "pointer-events-none p-1 bg-[var(--primary-color)] font-bold text-white rounded-xl",
+        greyButton:"w-full cursor-pointer bg-gray-800/80 text-white border-1 border-gray-700 rounded-xl hover:bg-gray-700/50 hover:border-gray-700 hover:text-white focus-visible:!outline-none focus-visible:!ring-0 focus-visible:ring-offset-0",
+        blurButton:"pointer-events-none w-full border rounded-xl border-white bg-backdrop-blur-lg bg-gray-300/60 border border-gray-200/80",  
+      whiteButton:"w-full pointer-events-none border border-white  bg-white border border-gray-200/80",
+      },
       size: {
         default:
           "h-8 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
@@ -43,8 +52,8 @@ greenSolidButton:"pointer-events-none p-1 bg-[var(--primary-color)] font-bold te
       variant: "default",
       size: "default",
     },
-  }
-)
+  },
+);
 
 function Button({
   className,
@@ -54,9 +63,9 @@ function Button({
   ...props
 }: React.ComponentProps<"button"> &
   VariantProps<typeof buttonVariants> & {
-    asChild?: boolean
+    asChild?: boolean;
   }) {
-  const Comp = asChild ? Slot.Root : "button"
+  const Comp = asChild ? Slot.Root : "button";
 
   return (
     <Comp
@@ -66,7 +75,7 @@ function Button({
       className={cn(buttonVariants({ variant, size, className }))}
       {...props}
     />
-  )
+  );
 }
 
-export { Button, buttonVariants }
+export { Button, buttonVariants };
