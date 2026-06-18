@@ -3,11 +3,13 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import { BrowserRouter } from 'react-router-dom'
-
+import { WishListProvider } from './context/WishListContext.tsx'
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
+    <WishListProvider>
     <BrowserRouter>
       <App/>
     </BrowserRouter>
+    </WishListProvider>
   </StrictMode>,
 )

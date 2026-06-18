@@ -1,13 +1,17 @@
 import { ArrowRight, Clock, Heart, MapPin, Mountain } from "lucide-react";
 import { Button } from "./ui/button";
 import { useNavigate } from "react-router-dom";
+import { useWishList } from "@/context/WishListContext";
 function TourPackageCard({ TourPackages }: any) {
   const navigate = useNavigate();
+  const { wishlist, toggleWishlist } = useWishList();
   return (
     <div
       className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8 m-8"
     >
-      {TourPackages.map((pkg, index) => (
+      {TourPackages.map((pkg, index) => {
+        const isWishlisted=wishlist.tourPackages.includes(pkg.id);
+        return(
         <div
           key={index}
           className="flex flex-col bg-white rounded-2xl cursor-pointer shadow-sm text-sm border border-gray-100 over:border-gray-200 transition-all duration-300 group "
@@ -26,11 +30,18 @@ function TourPackageCard({ TourPackages }: any) {
 
             <div
               className="absolute top-4 right-4 bg-white/20 p-2 rounded-full border border-white/30 transition-colors hover:bg-white/40 isolate"
+            onClick={(e)=>{
+              e.stopPropagation();
+              toggleWishlist("tourPackages",pkg.id)
+            }}
             >
-              <Heart
+               <Heart
                 size={18}
-                className=" text-white hover:fill-red-600 hover:text-red-600"
-              />
+                className={`
+      ${isWishlisted ? "fill-red-600 text-red-600" : "text-white"}
+      hover:fill-red-600
+      hover:text-red-600
+    `} />
             </div>
             <div className="absolute bottom-4 left-4 right-4 text-white">
               <h3
@@ -127,7 +138,7 @@ function TourPackageCard({ TourPackages }: any) {
             </div>
           </div>
         </div>
-      ))}
+      )})}
     </div>
   );
 }

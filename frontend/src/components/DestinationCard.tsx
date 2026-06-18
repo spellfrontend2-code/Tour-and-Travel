@@ -1,14 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import { Heart, MapPin, Star } from "lucide-react";
 import { Button } from "./ui/button";
+import { useWishList } from "@/context/WishListContext";
 
 function DestinationCard({ Destinations }: any) {
+  const { wishlist, toggleWishlist } = useWishList();
   const navigate = useNavigate();
   return (
     <div
       className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8 m-8"
     >
-      {Destinations.map((dest, index) => (
+      {Destinations.map((dest, index) => {
+        const isWishlisted = wishlist.destinations.includes(dest.id);
+        return(
         <div
           key={index}
           className="flex flex-col bg-white rounded-2xl cursor-pointer shadow-sm text-sm border border-gray-100 over:border-gray-200 transition-all duration-300 group "
@@ -27,11 +31,18 @@ function DestinationCard({ Destinations }: any) {
 
             <div
               className="absolute top-4 right-4 bg-white/20 p-2 rounded-full border border-white/30 transition-colors hover:bg-white/40 isolate"
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleWishlist("destinations",dest.id);
+            }}
             >
-              <Heart
+                <Heart
                 size={18}
-                className=" text-white hover:fill-red-600 hover:text-red-600"
-              />
+                className={`
+      ${isWishlisted ? "fill-red-600 text-red-600" : "text-white"}
+      hover:fill-red-600
+      hover:text-red-600
+    `} />
             </div>
             <div
               className="absolute top-4 left-4 bg-white/20 px-3 py-1.5 rounded-full border border-white/30 shadow-sm"
@@ -97,7 +108,7 @@ function DestinationCard({ Destinations }: any) {
             </Button>
           </div>
         </div>
-      ))}
+      )})}
     </div>
   );
 }
