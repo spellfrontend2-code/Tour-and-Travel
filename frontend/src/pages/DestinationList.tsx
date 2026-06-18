@@ -1,17 +1,31 @@
-import DestinationCard from "@/components/DestinationCard"
-import CategoryList from "../components/CategoryList"
-const categories=[{name:"Asia",id:1},{name:"Europe",id:2},{name:"Africa",id:3},{name:"North America",id:4},{name:"South America",id:5},{name:"Oceania",id:6}]  
-function DestinationList(){
-    return(
-        <div className="m-10">
-              <p className="text-[var(--primary-color)] text-sm font-medium">
+import DestinationCard from "@/components/DestinationCard";
+import CategoryList from "../components/CategoryList";
+
+import Destinations from "../data/Destinations";
+import useFetchCategories from "@/hooks/useFetchCategories";
+import useFilters from "@/hooks/useFilters";
+
+function DestinationList() {
+  const categories = useFetchCategories(Destinations, "region")||[];
+const {
+  setCategory,
+  setSearch,
+  filteredData,
+} = useFilters(Destinations, "region");
+
+  return (
+    <div className="m-10">
+      <p className="text-[var(--primary-color)] text-sm font-medium">
         Popular Destinations
       </p>
       <p className="text-3xl font-bold">Tour & Trek Destinations</p>
-
-        <CategoryList categories={categories}/>
-        <DestinationCard/>
-        </div>
-    )
+      <CategoryList
+        categories={categories}
+        onCategoryChange={setCategory}
+        onSearchChange={setSearch}
+      />
+      <DestinationCard Destinations={filteredData} />
+    </div>
+  );
 }
-export default DestinationList
+export default DestinationList;

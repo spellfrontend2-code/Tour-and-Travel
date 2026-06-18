@@ -1,205 +1,134 @@
 import { ArrowRight, Clock, Heart, MapPin, Mountain } from "lucide-react";
-import pic from "../assets/destinations/1.jfif";
 import { Button } from "./ui/button";
 import { useNavigate } from "react-router-dom";
-const Packages = [
-  {
-    id: 1,
-    name: "Everest Base Camp Trek",
-    location: "Solukhumbu, Nepal",
-    packages: [
-      {
-        name: "Standard",
-        price: 1299,
-        currency: "$",
-      },
-      {
-        name: "Standard Plus",
-        price: 1599,
-        currency: "$",
-      },
-      {
-        name: "Deluxe",
-        price: 1999,
-        currency: "$",
-      },
-    ],
-    days: 14,
-    image: pic,
-    maximumAltitude: "5,364m",
-    groupMembers: "4-12",
-    description:
-      "Experience the iconic trek to Everest Base Exence the iconic trek to Everest Base Camp. Experience the iconic trek to Everest Base Camp. Experience the iconic trek to Everest Base Camp.",
-  },
-  {
-    id: 1,
-    name: "Everest Base Camp Trek",
-    location: "Solukhumbu, Nepal",
-    packages: [
-      {
-        name: "Standard",
-        price: 1299,
-        currency: "$",
-      },
-      {
-        name: "Standard Plus",
-        price: 1599,
-        currency: "$",
-      },
-      {
-        name: "Deluxe",
-        price: 1999,
-        currency: "$",
-      },
-    ],
-    days: 14,
-    image: pic,
-    maximumAltitude: "5,364m",
-    groupMembers: "4-12",
-    description:
-      "Experience the iconic trek to Everest Base Exence the iconic trek to Everest Base Camp. Experience the iconic trek to Everest Base Camp. Experience the iconic trek to Everest Base Camp.",
-  },
-  {
-    id: 1,
-    name: "Everest Base Camp Trek",
-    location: "Solukhumbu, Nepal",
-    packages: [
-      {
-        name: "Standard",
-        price: 1299,
-        currency: "$",
-      },
-      {
-        name: "Standard Plus",
-        price: 1599,
-        currency: "$",
-      },
-      {
-        name: "Deluxe",
-        price: 1999,
-        currency: "$",
-      },
-    ],
-    days: 14,
-    image: pic,
-    maximumAltitude: "5,364m",
-    groupMembers: "4-12",
-    description:
-      "Experience the iconic trek to Everest Base Exence the iconic trek to Everest Base Camp. Experience the iconic trek to Everest Base Camp. Experience the iconic trek to Everest Base Camp.",
-  },
-  {
-    id: 1,
-    name: "Everest Base Camp Trek",
-    location: "Solukhumbu, Nepal",
-    packages: [
-      {
-        name: "Standard",
-        price: 1299,
-        currency: "$",
-      },
-      {
-        name: "Standard Plus",
-        price: 1599,
-        currency: "$",
-      },
-      {
-        name: "Deluxe",
-        price: 1999,
-        currency: "$",
-      },
-    ],
-    days: 14,
-    image: pic,
-    maximumAltitude: "5,364m",
-    groupMembers: "4-12",
-    description:
-      "Experience the iconic trek to Everest Base Exence the iconic trek to Everest Base Camp. Experience the iconic trek to Everest Base Camp. Experience the iconic trek to Everest Base Camp.",
-  },
-];
- function TourPackageCard() {
+function TourPackageCard({ TourPackages }: any) {
   const navigate = useNavigate();
   return (
-    
-      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 ">
-        {Packages.map((pkg, index) => (
+    <div
+      className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8 m-8"
+    >
+      {TourPackages.map((pkg, index) => (
+        <div
+          key={index}
+          className="flex flex-col bg-white rounded-2xl cursor-pointer shadow-sm text-sm border border-gray-100 over:border-gray-200 transition-all duration-300 group "
+        >
           <div
-            key={index}
-            className="flex flex-col rounded-lg m-10 cursor-pointer text-sm  border-2 hover:shadow-lg"
+            className="relative h-56 overflow-hidden rounded-t-2xl"
           >
-            <div className="relative h-1/2 overflow-hidden rounded-t-lg">
-              <img
-                src={pkg.image}
-                className="h-full w-full  transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg"
-              />
+            <img
+              src={pkg.image}
+              alt={pkg.name}
+              className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+            />
+            <div
+              className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/30 opacity-80 transition-opacity duration-300 group-hover:opacity-100"
+            />
 
-              <div className="absolute top-2 right-2 bg-gray-300 p-1 rounded-xl ">
-                <Heart
-                  size={18}
-                  className=" text-gray-500 hover:fill-red-600 hover:text-red-600"
-                />
-              </div>
+            <div
+              className="absolute top-4 right-4 bg-white/20 p-2 rounded-full border border-white/30 transition-colors hover:bg-white/40 isolate"
+            >
+              <Heart
+                size={18}
+                className=" text-white hover:fill-red-600 hover:text-red-600"
+              />
             </div>
-            <div className="h-2/3 flex flex-col justify-between">
-              <div className="flex flex-col justify-between">
-                {/* Packages    */}
-                <div className="flex justify-between gap-1 m-1 ">
-                  {pkg.packages.map((p, i) => (
-                    <div
-                      key={i}
-                      className="flex flex-col text-center justify-between rounded-lg p-2 bg-white border-2 border-gray-200 w-[120px] hover:border-[rgb(var(--primary-rgb)/0.3)] hover:text-[var(--primary-color)]"
-                    >
-                      <p className="text-xs font-bold text-gray-500">
-                        {p.name}
-                      </p>
-                      <p className="font-bold ">
-                        {p.currency}
-                        {p.price}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-                <div className="h-2/3  flex flex-col items-left justify-between p-2">
-                  {/* Location */}
-                  <div>
-                    <div><p className="flex text-sm font-medium items-center gap-2 text-[var(--primary-color)]">
-                      <MapPin size={15} />
-                      {pkg.location}
-                    </p>
-                    <p className="font-bold">{pkg.name}</p></div>
-                  </div>
-                  {/* Time */}
-                  <div className="flex text-gray-400 justify-between border-y-1 border-gray-100 p-1">
-                    <p className="flex items-center gap-2">
-                      <Clock size={15} />
-                      {pkg.days}days
-                    </p>
-                    <p className="flex items-center gap-2">
-                      <Mountain size={15} />
-                      Max. Altitude:{pkg.maximumAltitude}
-                    </p>
-                  </div>
-                  <p className="overflow-hidden text-gray-400 line-clamp-2">
-                    {pkg.description}
-                  </p>
-                </div>
-              </div>
-              {/* Button */}
-              <div className="w-full my-2">
-                <Button
-                className="w-full"
-                  variant="default"
-                  onClick={() => navigate(`/tours/${pkg.id}`)}
-                >
-                  View details
-                  <ArrowRight />
-                </Button>
-              </div>
+            <div className="absolute bottom-4 left-4 right-4 text-white">
+              <h3
+                className="text-xl font-bold mb-1 drop-shadow-md"
+              >
+                {pkg.name}
+              </h3>
+
+              <p
+                className="flex items-center gap-1 text-sm font-medium text-gray-200"
+              >
+                <MapPin
+                  size={16}
+                  className="text-[var(--primary-color)]"
+                />
+
+                {pkg.location}
+              </p>
             </div>
           </div>
-        ))}
-      </div>
-   
+          <div
+            className="flex-1 flex flex-col justify-between p-6 gap-4"
+          >
+            <div className="flex flex-col justify-between">
+              {/* TourPackages */}
+              <div
+                className="flex justify-between gap-1 overflow-x-auto scrollbar-none "
+              >
+                {pkg.packages.map((p, i) => (
+                  <div
+                    key={i}
+                    className="flex flex-col text-center justify-between bg-gray-50 rounded-lg p-2 bg-white border-2 border-gray-100 w-[120px] hover:border-[rgb(var(--primary-rgb)/0.3)] hover:text-[var(--primary-color)]"
+                  >
+                    <p
+                      className="text-xs font-bold text-gray-500"
+                    >
+                      {p.name}
+                    </p>
+                    <p className="font-bold ">
+                      {pkg.currency}
+                      {p.price}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <div
+                className="h-2/3 flex flex-col items-left justify-between p-2"
+              >
+                {/* Time */}
+
+                <div
+                  className="flex text-gray-400 justify-between border-y-1 border-gray-100 p-1"
+                >
+                  <p
+                    className="flex items-center gap-2 font-medium"
+                  >
+                    <Clock
+                      size={15}
+                      color="var(--primary-color)"
+                    />
+                    {pkg.days}days
+                  </p>
+
+                  <p
+                    className="flex items-center gap-2 font-medium"
+                  >
+                    <Mountain
+                      size={15}
+                      color="var(--primary-color)"
+                    />
+                    Max. Altitude:{pkg.maxAltitude}
+                  </p>
+                </div>
+                <p
+                  className="overflow-hidden text-gray-400 line-clamp-2"
+                >
+                  {pkg.description}
+                </p>
+              </div>
+            </div>
+            {/* Button */}
+            <div className="w-full ">
+              <Button
+                className="w-full cursor-pointer bg-[var(--primary-color)] hover:bg-[rgb(var(--primary-rgb)/0.9)]"
+                variant="default"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  navigate(`/tours/${pkg.id}`);
+                }}
+              >
+                View details
+                <ArrowRight />
+              </Button>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
   );
 }
-
 export default TourPackageCard;

@@ -1,25 +1,31 @@
 import BlogCard from "@/components/BlogCard";
 import CategoryList from "@/components/CategoryList";
-const categories = [
-  { name: "Travel Guides", id: 1 },
-  { name: "Destinations", id: 2 },
-  { name: "Adventure", id: 3 },
-  { name: "Culture & Heritage", id: 4 },
-  { name: "Food & Cuisine", id: 5 },
-  { name: "Travel Tips", id: 6 },
-  { name: "Budget Travel", id: 7 },
-  { name: "Luxury Travel", id: 8 },
-  { name: "Solo Travel", id: 9 },
-  { name: "Family Travel", id: 10 },
-  { name: "Hiking & Trekking", id: 11 },
-  { name: "Wildlife & Nature", id: 12 },
-];
+import Blogs from "@/data/Blogs";
+import useFetchCategories from "@/hooks/useFetchCategories";
+import useFilters from "@/hooks/useFilters";
+
 function BlogList(){
+    const categories=useFetchCategories(Blogs,"category");
+    const {
+  setCategory,
+  setSearch,
+  filteredData,
+} = useFilters(Blogs, "category");
+
 return (
-    <div>
-        <CategoryList categories={categories}/>
-        <BlogCard/>
-    </div>
+<div className="m-10">
+
+<p className="text-[var(--primary-color)] text-sm font-
+medium">
+
+Popular Blogs
+</p>
+<p className="text-3xl font-bold">Tour & Trek Blogs</p>
+<CategoryList  categories={categories}
+        onCategoryChange={setCategory}
+        onSearchChange={setSearch}/>
+<BlogCard Blogs={filteredData}/>
+</div>
 )
 }
 export default BlogList;

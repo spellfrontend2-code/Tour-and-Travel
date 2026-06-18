@@ -1,12 +1,20 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Calendar as CalendarIcon, ChevronDown, Search, SearchIcon } from "lucide-react";
+import {
+  Calendar as CalendarIcon,
+  ChevronDown,
+  Search,
+  SearchIcon,
+} from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+const inputStyles ="w-full bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-700 rounded-xl p-3.5 text-sm font-medium text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent transition-all placeholder-gray-400";
+
+const buttonStyles ="w-full bg-[var(--primary-color)] hover:bg- [var(--primary-color)]/90 text-white font-bold py-3.5 rounded-xl transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2";
 type CounterProps = {
   label: string;
   value: number;
@@ -21,23 +29,30 @@ function PassengerCounter({
 }: CounterProps) {
   return (
     <div className="flex items-center justify-between gap-8">
-      <span className="font-medium">{label}</span>
+      <span
+        className="font-bold text-gray-700 dark:text-gray-300"
+      >
+        {label}
+      </span>
 
       <div className="flex items-center gap-3">
         <button
           type="button"
           onClick={onDecrease}
-          className="h-8 w-8 rounded border"
+          className="h-8 w-8 rounded-lg border border-gray-200 flex items-center justify-center hover:bg-gray-100  text-gray-600  transition-colors"
         >
           -
         </button>
-
-        <span className="w-6 text-center">{value}</span>
+        <span
+          className="w-6 text-center font-bold text-gray-900"
+        >
+          {value}
+        </span>
 
         <button
           type="button"
           onClick={onIncrease}
-          className="h-8 w-8 rounded border"
+          className="h-8 w-8 rounded-lg border border-gray-200 flex items-center justify-center hover:bg-gray-100 text-gray-600 dark:text-gray-300 transition-colors"
         >
           +
         </button>
@@ -76,78 +91,117 @@ export function HotelForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="space-y-6 p-6 w-full"
+      className="p-4 sm:p-6 w-full"
     >
-      <div className="grid gap-5 md:grid-cols-5 text-gray-500 text-sm">
-        <input
-          {...register("destination", {
-            required: "Destination is required",
-          })}
-          placeholder="Destination"
-          className="rounded border p-2"
-        />
-
-        <Popover>
-          <PopoverTrigger asChild>
-            <div className="rounded border p-2 flex items-center gap-2">
-                {checkIn ? checkIn.toDateString() : "Select check-in date"}
-                <CalendarIcon size={20}/>
-            </div>
-          </PopoverTrigger>
-
-          <PopoverContent className="p-0">
-            <Calendar
-              mode="single"
-              selected={checkIn}
-              onSelect={(date) => setValue("checkIn", date)}
-              disabled={(date) => date < new Date()}
-            />
-          </PopoverContent>
-        </Popover>
-
-        <Popover>
-          <PopoverTrigger asChild>
-            <div className="rounded border p-2 flex items-center gap-2">
-                {checkOut ? checkOut.toDateString() : "Select check-out date"}{" "}
-                <CalendarIcon size={20}/>
-
-            </div>
-          </PopoverTrigger>
-
-          <PopoverContent className="p-0">
-            <Calendar
-              mode="single"
-              selected={checkOut}
-              onSelect={(date) => setValue("checkOut", date)}
-              disabled={(date) => {
-                const today = new Date();
-                today.setHours(0, 0, 0, 0);
-
-                if (!checkIn) return date < today;
-
-                return date < checkIn;
-              }}
-              className="text-color-red"
-            />
-          </PopoverContent>
-        </Popover>
-        <div className="relative inline-block w-full">
+      <div
+        className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 items-end"
+      >
+        <div className="space-y-2">
+          <label
+            className="text-xs font-bold text-gray-500 uppercase tracking-wider"
+          >
+            Destination
+          </label>
+          <input
+            {...register("destination", { required: "Required" })}
+            placeholder="Where are you going?"
+            className={inputStyles}
+          />
+        </div>
+        <div className="space-y-2">
+          <label
+            className="text-xs font-bold text-gray-500 uppercase tracking-wider"
+          >
+            Check In
+          </label>
+          <Popover>
+            <PopoverTrigger asChild>
+              <button
+                type="button"
+                className={`${inputStyles} flex items-center justify-between`}
+              >
+                <span className="truncate">
+                  {checkIn ? checkIn.toDateString() : "Select date"}
+                </span>
+                <CalendarIcon
+                  size={18}
+                  className="text-gray-400 shrink-0"
+                />
+              </button>
+            </PopoverTrigger>
+            <PopoverContent
+              className="p-0 border-gray-200 rounded-xl"
+            >
+              <Calendar
+                mode="single"
+                selected={checkIn}
+                onSelect={(date) => setValue("checkIn", date)}
+                disabled={(date) => date < new Date()}
+              />
+            </PopoverContent>
+          </Popover>
+        </div>
+        <div className="space-y-2">
+          <label
+            className="text-xs font-bold text-gray-500 uppercase tracking-wider"
+          >
+            Check Out
+          </label>
+          <Popover>
+            <PopoverTrigger asChild>
+              <button
+                type="button"
+                className={`${inputStyles} flex items-center justify-between`}
+              >
+                <span className="truncate">
+                  {checkOut ? checkOut.toDateString() : "Select date"}
+                </span>
+                <CalendarIcon
+                  size={18}
+                  className="text-gray-400 shrink-0"
+                />
+              </button>
+            </PopoverTrigger>
+            <PopoverContent
+              className="p-0 border-gray-200 rounded-xl"
+            >
+              <Calendar
+                mode="single"
+                selected={checkOut}
+                onSelect={(date) => setValue("checkOut", date)}
+                disabled={(date) => {
+                  const today = new Date();
+                  today.setHours(0, 0, 0, 0);
+                  return !checkIn ? date < today : date < checkIn;
+                }}
+              />
+            </PopoverContent>
+          </Popover>
+        </div>
+        <div className="space-y-2 relative">
+          <label
+            className="text-xs font-bold text-gray-500 uppercase tracking-wider"
+          >
+            Guests & Rooms
+          </label>
           <button
             type="button"
             onClick={() => setOpen(!open)}
-            className="rounded border p-2 flex items-center justify-between"
+            className={`${inputStyles} flex items-center justify-between`}
           >
-            <span>
-              {adults} Adult{adults > 1 ? "s" : ""}, {children} Child
-              {children > 1 ? "ren" : ""}, {rooms} Room{rooms > 1 ? "s" : ""}
+            <span className="truncate text-left">
+              {adults} Adult{adults > 1 ? "s" : ""}, {children}
+              Child{children > 1 ? "ren" : ""}
             </span>
-
             <ChevronDown
-              className={`transition-transform ${open ? "rotate-180" : ""}`}
+              className={`text-gray-400 shrink-0 transition-transform ${open ? "rotate-180" : ""}`}
+              size={18}
             />
           </button>
           {open && (
-            <div className="absolute z-10 mt-2 w-72 rounded-lg border bg-white p-4 shadow-lg">
+            <div
+              className="absolute z-50 mt-2 w-72 rounded-2xl border border-gray-100  bg-white p-5 shadow-2xl space-y-4"
+            >
               <PassengerCounter
                 label="Adults"
                 value={adults}
@@ -171,22 +225,16 @@ export function HotelForm() {
             </div>
           )}
         </div>
-        <button
-          type="submit"
-          className="flex items-center gap-2 rounded bg-[var(--primary-color)] px-6 py-2 text-white"
-        >
-          <Search />
-          Search
+        <button type="submit" className={buttonStyles}>
+          <Search size={18} /> Search Hotels
         </button>
       </div>
     </form>
   );
 }
-
 export function FlightForm() {
   const [trip, setTrip] = useState("oneway");
   const [open, setOpen] = useState(false);
-
   const { register, watch, setValue, handleSubmit } = useForm({
     defaultValues: {
       from: "",
@@ -198,163 +246,153 @@ export function FlightForm() {
       infants: 0,
     },
   });
-
   const adults = watch("adults");
   const children = watch("children");
   const infants = watch("infants");
-
   const onSubmit = (data: any) => {
-    console.log({
-      ...data,
-      tripType: trip,
-    });
+    console.log({ ...data, tripType: trip });
   };
-
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="space-y-6 p-6 w-full"
+      className="p-4 sm:p-6 w-full flex flex-col gap-6"
     >
-      {/* Trip Type */}
-      <fieldset>
-        <legend className="mb-2 font-semibold">Trip Type</legend>
-
-        <div className="flex gap-6">
-          {[
-            { label: "One Way", value: "oneway" },
-            { label: "Round Trip", value: "roundtrip" },
-            { label: "Multi City", value: "multicity" },
-          ].map((option) => (
-            <label
-              key={option.value}
-              className="flex items-center gap-2 cursor-pointer"
-            >
-              <input
-                type="radio"
-                name="trip"
-                value={option.value}
-                checked={trip === option.value}
-                onChange={() => setTrip(option.value)}
-                className="accent-[var(--primary-color)]"
-              />
-              {option.label}
-            </label>
-          ))}
-        </div>
-      </fieldset>
-
+      {/* Trip Type (Sleek pill buttons) */}
+      <div className="flex gap-2">
+        {[
+          { label: "One Way", value: "oneway" },
+          { label: "Round Trip", value: "roundtrip" },
+        ].map((option) => (
+          <button
+            type="button"
+            key={option.value}
+            onClick={() => setTrip(option.value)}
+            className={`px-4 py-2 rounded-full text-sm font-bold transition-all ${
+              trip === option.value
+                ? "bg-[var(--primary-color)] text-white shadow-md"
+                : "bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-slate-700"
+            }`}
+          >
+            {option.label}
+          </button>
+        ))}
+      </div>
       {/* Search Fields */}
       <div
-        className={`grid gap-4 ${trip === "roundtrip" ? "md:grid-cols-6" : "md:grid-cols-5"}`}
+        className={`grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 items-end`}
       >
-        <input
-          type="text"
-          placeholder="From"
-          {...register("from")}
-          className="rounded border p-2"
-        />
-
-        <input
-          type="text"
-          placeholder="To"
-          {...register("to")}
-          className="rounded border p-2"
-        />
-
-        <input
-          type="date"
-          {...register("departure")}
-          className="rounded border p-2"
-        />
-
-        {trip === "roundtrip" && (
+        <div className="space-y-2">
+          <label
+            className="text-xs font-bold text-gray-500 uppercase tracking-wider"
+          >
+            From
+          </label>
+          <input
+            type="text"
+            placeholder="Departure city"
+            {...register("from")}
+            className={inputStyles}
+          />
+        </div>
+        <div className="space-y-2">
+          <label
+            className="text-xs font-bold text-gray-500 uppercase tracking-wider"
+          >
+            To
+          </label>
+          <input
+            type="text"
+            placeholder="Arrival city"
+            {...register("to")}
+            className={inputStyles}
+          />
+        </div>
+        <div className="space-y-2">
+          <label
+            className="text-xs font-bold text-gray-500 uppercase tracking-wider"
+          >
+            Departure
+          </label>
           <input
             type="date"
-            {...register("returnDate")}
-            className="rounded border p-2"
+            {...register("departure")}
+            className={inputStyles}
           />
-        )}
-        {/* Passenger Dropdown */}
-        <div className="relative inline-block w-full">
+        </div>
+        <div className="space-y-2 relative">
+          <label
+            className="text-xs font-bold text-gray-500 uppercase tracking-wider"
+          >
+            Passengers
+          </label>
           <button
             type="button"
             onClick={() => setOpen(!open)}
-            className="w-full rounded border p-2 flex items-center justify-between"
+            className={`${inputStyles} flex items-center justify-between`}
           >
-            <span>
-              {adults} Adult{adults > 1 ? "s" : ""}, {children} Child
-              {children > 1 ? "ren" : ""}, {infants} Infant
-              {infants > 1 ? "s" : ""}
+            <span className="truncate text-left">
+              {adults} Adult{adults > 1 ? "s" : ""}, {children}
+              Child
             </span>
-
             <ChevronDown
-              className={`transition-transform ${open ? "rotate-180" : ""}`}
+              className={`text-gray-400 shrink-0 transition-transform ${open ? "rotate-180" : ""}`}
+              size={18}
             />
           </button>
-
           {open && (
-            <div className="absolute z-10 mt-2 w-72 rounded-lg border bg-white p-4 shadow-lg">
-              <div className="space-y-4">
-                <PassengerCounter
-                  label="Adults"
-                  value={adults}
-                  onDecrease={() => setValue("adults", Math.max(1, adults - 1))}
-                  onIncrease={() => setValue("adults", adults + 1)}
-                />
-
-                <PassengerCounter
-                  label="Children"
-                  value={children}
-                  onDecrease={() =>
-                    setValue("children", Math.max(0, children - 1))
-                  }
-                  onIncrease={() => setValue("children", children + 1)}
-                />
-
-                <PassengerCounter
-                  label="Infants"
-                  value={infants}
-                  onDecrease={() =>
-                    setValue("infants", Math.max(0, infants - 1))
-                  }
-                  onIncrease={() => setValue("infants", infants + 1)}
-                />
-              </div>
+            <div
+              className="absolute z-50 mt-2 w-72 rounded-2xl border border-gray-100  bg-white  p-5 shadow-2xl space-y-4"
+            >
+              <PassengerCounter
+                label="Adults"
+                value={adults}
+                onDecrease={() => setValue("adults", Math.max(1, adults - 1))}
+                onIncrease={() => setValue("adults", adults + 1)}
+              />
+              <PassengerCounter
+                label="Children"
+                value={children}
+                onDecrease={() =>
+                  setValue("children", Math.max(0, children - 1))
+                }
+                onIncrease={() => setValue("children", children + 1)}
+              />
+              <PassengerCounter
+                label="Infants"
+                value={infants}
+                onDecrease={() => setValue("infants", Math.max(0, infants - 1))}
+                onIncrease={() => setValue("infants", infants + 1)}
+              />
             </div>
           )}
         </div>
-              <button
-        type="submit"
-        className="rounded px-6 py-2 text-white flex items-center gap-2 bg-[var(--primary-color)]"
-      >
-        <SearchIcon/>
-        Search Flights
-      </button>
+        <button type="submit" className={buttonStyles}>
+          <SearchIcon size={18} /> Search Flights
+        </button>
       </div>
-
-
     </form>
   );
 }
-
-const carModels=["Sedan","SUV","Hatchback","Coupe"];
+const carModels = ["Sedan", "SUV", "Hatchback", "Coupe", "Luxury"];
 type RentalFormValues = {
   pickUpLocation: string;
   dropOffLocation: string;
   pickUp?: Date;
   dropOff?: Date;
-  carModel:string
+  carModel: string;
 };
 export function RentalForm() {
-  const { register, watch, setValue, handleSubmit } = useForm<RentalFormValues>({
-    defaultValues: {
-      pickUpLocation: "",
-      dropOffLocation:"",
-      pickUp: new Date(),
-      dropOff: new Date(),
-    carModel:""
+  const { register, watch, setValue, handleSubmit } = useForm<RentalFormValues>(
+    {
+      defaultValues: {
+        pickUpLocation: "",
+        dropOffLocation: "",
+        pickUp: new Date(),
+        dropOff: new Date(),
+        carModel: "",
+      },
     },
-  });
+  );
   const onSubmit = (data: any) => {
     console.log(data);
   };
@@ -365,129 +403,168 @@ export function RentalForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="space-y-6 p-6 w-full"
+      className="p-4 sm:p-6 w-full flex flex-col gap-4"
     >
-      <div className="grid gap-5 md:grid-cols-6 text-gray-500 text-sm">
-        <input
-          {...register("pickUpLocation", {
-            required: "Pick-up location is required",
-          })}
-          placeholder="Pick-up location"
-          className="rounded border p-2"
-        />
-        <input
-          {...register("dropOffLocation", {
-            required: "Drop-off location is required",
-          })}
-          placeholder="Drop-off location"
-          className="rounded border p-2"
-        />
-
-        <Popover>
-          <PopoverTrigger asChild>
-            <div className="rounded border p-2 flex items-center gap-2">
-                {pickUp ? pickUp.toDateString() : "Select pick-up date"}
-                <CalendarIcon size={20}/>
-            </div>
-          </PopoverTrigger>
-
-          <PopoverContent className="p-0">
-            <Calendar
-              mode="single"
-              selected={pickUp}
-              onSelect={(date) => setValue("pickUp", date)}
-              disabled={(date) => date < new Date()}
-            />
-          </PopoverContent>
-        </Popover>
-
-        <Popover>
-          <PopoverTrigger asChild>
-            <div className="rounded border p-2 flex items-center gap-2">
-                {dropOff ? dropOff.toDateString() : "Select drop-off date"}{" "}
-                <CalendarIcon size={20}/>
-
-            </div>
-          </PopoverTrigger>
-
-          <PopoverContent className="p-0">
-            <Calendar
-              mode="single"
-              selected={dropOff}
-              onSelect={(date) => setValue("dropOff", date)}
-              disabled={(date) => {
-                const today = new Date();
-                today.setHours(0, 0, 0, 0);
-
-                if (!pickUp) return date < today;
-
-                return date < pickUp;
-              }}
-              className="text-color-red"
-            />
-          </PopoverContent>
-        </Popover>
-       <div className="relative inline-block w-full">
-  <button
-    type="button"
-    onClick={() => setOpen(!open)}
-    className="rounded border p-2 flex items-center justify-between w-full"
-  >
-    <span>{carModel|| "Select Car Model"}</span>
-
-    <ChevronDown
-      className={`transition-transform ${open ? "rotate-180" : ""}`}
-    />
-  </button>
-
-  {open && (
-    <div className="absolute z-10 mt-2 w-full rounded-lg border bg-white p-2 shadow-lg">
-      {carModels.map((car, index) => (
-        <div
-          key={index}
-          onClick={() => {
-            setValue("carModel", car);
-            setOpen(false);
-          }}
-          className="p-2 rounded cursor-pointer hover:bg-gray-100"
-        >
-          {car}
+      <div
+        className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 items-end"
+      >
+        <div className="space-y-2">
+          <label
+            className="text-xs font-bold text-gray-500 uppercase tracking-wider"
+          >
+            Pick-up
+          </label>
+          <input
+            {...register("pickUpLocation")}
+            placeholder="City or Airport"
+            className={inputStyles}
+          />
         </div>
-      ))}
-    </div>
-  )}
-</div>
-        <button
-          type="submit"
-          className="flex items-center gap-2 rounded bg-[var(--primary-color)] px-6 py-2 text-white"
-        >
-          <Search />
-          Search
+        <div className="space-y-2">
+          <label
+            className="text-xs font-bold text-gray-500 uppercase tracking-wider"
+          >
+            Drop-off
+          </label>
+          <input
+            {...register("dropOffLocation")}
+            placeholder="City or Airport"
+            className={inputStyles}
+          />
+        </div>
+        <div className="space-y-2">
+          <label
+            className="text-xs font-bold text-gray-500 uppercase tracking-wider"
+          >
+            Pick-up Date
+          </label>
+          <Popover>
+            <PopoverTrigger asChild>
+              <button
+                type="button"
+                className={`${inputStyles} flex items-center justify-between`}
+              >
+                <span className="truncate">
+                  {pickUp ? pickUp.toDateString() : "Select date"}
+                </span>
+                <CalendarIcon
+                  size={18}
+                  className="text-gray-400 shrink-0"
+                />
+              </button>
+            </PopoverTrigger>
+            <PopoverContent
+              className="p-0 border-gray-200 rounded-xl"
+            >
+              <Calendar
+                mode="single"
+                selected={pickUp}
+                onSelect={(date) => setValue("pickUp", date)}
+                disabled={(date) => date < new Date()}
+              />
+            </PopoverContent>
+          </Popover>
+        </div>
+        <div className="space-y-2">
+          <label
+            className="text-xs font-bold text-gray-500 uppercase tracking-wider"
+          >
+            Drop-off Date
+          </label>
+          <Popover>
+            <PopoverTrigger asChild>
+              <button
+                type="button"
+                className={`${inputStyles} flex items-center justify-between`}
+              >
+                <span className="truncate">
+                  {dropOff ? dropOff.toDateString() : "Select date"}
+                </span>
+                <CalendarIcon
+                  size={18}
+                  className="text-gray-400 shrink-0"
+                />
+              </button>
+            </PopoverTrigger>
+            <PopoverContent
+              className="p-0 border-gray-200 rounded-xl"
+            >
+              <Calendar
+                mode="single"
+                selected={dropOff}
+                onSelect={(date) => setValue("dropOff", date)}
+                disabled={(date) => {
+                  const today = new Date();
+                  today.setHours(0, 0, 0, 0);
+                  return !pickUp ? date < today : date < pickUp;
+                }}
+              />
+            </PopoverContent>
+          </Popover>
+        </div>
+        <div className="space-y-2 relative">
+          <label
+            className="text-xs font-bold text-gray-500 uppercase tracking-wider"
+          >
+            Car Model
+          </label>
+          <button
+            type="button"
+            onClick={() => setOpen(!open)}
+            className={`${inputStyles} flex items-center justify-between`}
+          >
+            <span className="truncate">{carModel || "Select Model"}</span>
+            <ChevronDown
+              className={`text-gray-400 shrink-0 transition-transform ${open ? "rotate-180" : ""}`}
+              size={18}
+            />
+          </button>
+          {open && (
+            <div
+              className="absolute z-50 mt-2 w-full rounded-2xl border border-gray-100 bg-white  p-2 shadow-2xl">
+              {carModels.map((car, index) => (
+                <div
+                  key={index}
+                  onClick={() => {
+                    setValue("carModel", car);
+
+                    setOpen(false);
+                  }}
+                  className="p-3 rounded-xl cursor-pointer hover:bg-[var(--primary-color)]/10 hover:text-[var(--primary-color)] font-medium text-sm transition-colors"
+                >
+                  {car}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+        <button type="submit" className={buttonStyles}>
+          <Search size={18} /> Search
         </button>
       </div>
     </form>
   );
 }
-
 type PackageFormValues = {
   from: string;
-  to:string
+  to: string;
   departure?: Date;
   adults: number;
   children: number;
   rooms: number;
 };
 export function PackageForm() {
-  const { register, watch, setValue, handleSubmit } = useForm<PackageFormValues>({
-    defaultValues: {
-      from: "",
-      to:"",
-      departure: new Date(),
-      adults: 1,
-      children: 0,
-      rooms: 1,
-    },
-  });
+  const { register, watch, setValue, handleSubmit } =
+    useForm<PackageFormValues>({
+      defaultValues: {
+        from: "",
+        to: "",
+        departure: new Date(),
+        adults: 1,
+        children: 0,
+        rooms: 1,
+      },
+    });
   const onSubmit = (data: any) => {
     console.log(data);
   };
@@ -499,58 +576,92 @@ export function PackageForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="space-y-6 p-6 w-full"
+      className="p-4 sm:p-6 w-full"
     >
-      <div className="grid gap-5 md:grid-cols-5 text-gray-500 text-sm">
-        <input
-          {...register("from", {
-            required: "From location is required",
-          })}
-          placeholder="From"
-          className="rounded border p-2"
-        />
-   <input
-          {...register("to", {
-            required: "To location is required",
-          })}
-          placeholder="To"
-          className="rounded border p-2"
-        />
-        <Popover>
-          <PopoverTrigger asChild>
-            <div className="rounded border p-2 flex items-center gap-2">
-                {departure ? departure.toDateString() : "Select check-in date"}
-                <CalendarIcon size={20}/>
-            </div>
-          </PopoverTrigger>
-
-          <PopoverContent className="p-0">
-            <Calendar
-              mode="single"
-              selected={departure}
-              onSelect={(date) => setValue("departure", date)}
-              disabled={(date) => date < new Date()}
-            />
-          </PopoverContent>
-        </Popover>
-
-        <div className="relative inline-block w-full">
+      <div
+        className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 items-end"
+      >
+        <div className="space-y-2">
+          <label
+            className="text-xs font-bold text-gray-500 uppercase tracking-wider"
+          >
+            Origin
+          </label>
+          <input
+            {...register("from")}
+            placeholder="Leaving from"
+            className={inputStyles}
+          />
+        </div>
+        <div className="space-y-2">
+          <label
+            className="text-xs font-bold text-gray-500 uppercase tracking-wider"
+          >
+            Destination
+          </label>
+          <input
+            {...register("to")}
+            placeholder="Going to"
+            className={inputStyles}
+          />
+        </div>
+        <div className="space-y-2">
+          <label
+            className="text-xs font-bold text-gray-500 uppercase tracking-wider"
+          >
+            Departure
+          </label>
+          <Popover>
+            <PopoverTrigger asChild>
+              <button
+                type="button"
+                className={`${inputStyles} flex items-center justify-between`}
+              >
+                <span className="truncate">
+                  {departure ? departure.toDateString() : "Select date"}
+                </span>
+                <CalendarIcon
+                  size={18}
+                  className="text-gray-400 shrink-0"
+                />
+              </button>
+            </PopoverTrigger>
+            <PopoverContent
+              className="p-0 border-gray-200 rounded-xl"
+            >
+              <Calendar
+                mode="single"
+                selected={departure}
+                onSelect={(date) => setValue("departure", date)}
+                disabled={(date) => date < new Date()}
+              />
+            </PopoverContent>
+          </Popover>
+        </div>
+        <div className="space-y-2 relative">
+          <label
+            className="text-xs font-bold text-gray-500 uppercase tracking-wider"
+          >
+            Travelers
+          </label>
           <button
             type="button"
             onClick={() => setOpen(!open)}
-            className="rounded border p-2 flex items-center justify-between"
+            className={`${inputStyles} flex items-center justify-between`}
           >
-            <span>
-              {adults} Adult{adults > 1 ? "s" : ""}, {children} Child
-              {children > 1 ? "ren" : ""}, {rooms} Room{rooms > 1 ? "s" : ""}
+            <span className="truncate text-left">
+              {adults} Adult{adults > 1 ? "s" : ""}, {children}
+              Child
             </span>
-
             <ChevronDown
-              className={`transition-transform ${open ? "rotate-180" : ""}`}
+              className={`text-gray-400 shrink-0 transition-transform ${open ? "rotate-180" : ""}`}
+              size={18}
             />
           </button>
           {open && (
-            <div className="absolute z-10 mt-2 w-72 rounded-lg border bg-white p-4 shadow-lg">
+            <div
+              className="absolute z-50 mt-2 w-72 rounded-2xl border border-gray-100  bg-white p-5 shadow-2xl space-y-4"
+            >
               <PassengerCounter
                 label="Adults"
                 value={adults}
@@ -574,15 +685,10 @@ export function PackageForm() {
             </div>
           )}
         </div>
-        <button
-          type="submit"
-          className="flex items-center gap-2 rounded bg-[var(--primary-color)] px-6 py-2 text-white"
-        >
-          <Search />
-          Search
+        <button type="submit" className={buttonStyles}>
+          <Search size={18} /> Search Packages
         </button>
       </div>
     </form>
   );
 }
-

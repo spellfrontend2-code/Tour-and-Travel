@@ -1,152 +1,118 @@
 import { useNavigate } from "react-router-dom";
-import pic from "../assets/destinations/1.jfif";
-import {
-  ArrowRight,
-  Calendar,
-  Clock,
-  Heart,
-  Tag,
-  User,
-} from "lucide-react";
+import { ArrowRight, Calendar, Clock, Heart, Tag, User } from "lucide-react";
 import { Button } from "./ui/button";
-
-const Blogs = [
-  {
-    id: 1,
-    title: "Top 10 Trekking Routes in Nepal You Must Try",
-    slug: "top-10-trekking-routes-nepal",
-    author: "Adventure Team",
-    category: "Travel Guide",
-    image: pic,
-    tags: ["Nepal", "Trekking", "Himalayas"],
-    readTime: "6 min read",
-    publishedDate: "2026-06-01",
-    excerpt:
-      "Discover the most breathtaking trekking routes in Nepal, from Everest Base Camp to hidden Himalayan gems.",
-    content:
-      "Nepal offers some of the most iconic trekking experiences in the world. From the legendary Everest Base Camp trek to offbeat trails like Manaslu and Annapurna Circuit, each route offers unique landscapes, culture, and challenges...",
-  },
-  {
-    id: 2,
-    title: "How to Prepare for High Altitude Trekking",
-    slug: "high-altitude-trekking-preparation",
-    author: "Mountain Experts",
-    category: "Preparation",
-    image: pic,
-    tags: ["Altitude", "Fitness", "Safety"],
-    readTime: "5 min read",
-    publishedDate: "2026-05-20",
-    excerpt:
-      "Learn essential tips to prepare your body and mind for trekking at high altitudes safely.",
-    content:
-      "High altitude trekking requires proper preparation. Acclimatization, hydration, and fitness training are key factors to avoid altitude sickness...",
-  },
-  {
-    id: 3,
-    title: "Best Time to Visit Everest Base Camp",
-    slug: "best-time-everest-base-camp",
-    author: "Travel Nepal",
-    category: "Season Guide",
-    image: pic,
-    tags: ["Everest", "Season", "Weather"],
-    readTime: "4 min read",
-    publishedDate: "2026-04-10",
-    excerpt:
-      "Find out the ideal seasons for trekking to Everest Base Camp for the best views and safety.",
-    content:
-      "The best time to visit Everest Base Camp is during spring (March–May) and autumn (September–November)...",
-  },
-  {
-    id: 4,
-    title: "Essential Packing List for Trekking in Nepal",
-    slug: "trekking-packing-list-nepal",
-    author: "Gear Guide",
-    category: "Gear & Equipment",
-    image: pic,
-    tags: ["Packing", "Gear", "Checklist"],
-    readTime: "7 min read",
-    publishedDate: "2026-03-15",
-    excerpt:
-      "A complete packing guide to ensure you’re fully prepared for trekking in the Himalayas.",
-    content:
-      "Packing smart is crucial for trekking in Nepal. You need layers, waterproof gear, proper boots, and essential medical supplies...",
-  },
-  {
-    id: 5,
-    title: "Cultural Highlights of the Everest Region",
-    slug: "everest-region-culture",
-    author: "Culture Explorer",
-    category: "Culture",
-    image: pic,
-    tags: ["Culture", "Sherpa", "Tradition"],
-    readTime: "6 min read",
-    publishedDate: "2026-02-28",
-    excerpt:
-      "Explore the rich Sherpa culture and traditions of the Everest region.",
-    content:
-      "The Everest region is not just about mountains; it is home to the Sherpa community, known for their hospitality and mountaineering skills...",
-  },
-];
-function BlogCard() {
+function BlogCard({ Blogs }) {
   const navigate = useNavigate();
   return (
-    <div className=" ">
-   
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2">
-        {Blogs.map((blog, index) => (
-          <div key={index} className="flex flex-col rounded-lg m-10 cursor-pointer text-sm border-2 hover:shadow-lg">
-            <div className="relative h-1/2 overflow-hidden bg-red-400 rounded-t-lg">
-              <img
-                src={blog.image}
-                className="h-full w-full  transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg"
+    <div
+      className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8 m-8"
+    >
+      {Blogs.map((blog, index) => (
+        <div
+          key={index}
+          className="group flex flex-col rounded-2xl bg-white cursor-pointer text-sm border border-gray-100 shadow-sm hover:shadow-2xl hover:border-gray-200 transition-all duration-300">
+          <div
+            className="relative h-56 overflow-hidden rounded-t-2xl">
+            <img
+              src={blog.image}
+              alt={blog.title}
+              className="h-full w-full object-cover transition- transform duration-700 ease-out group-hover:scale-110"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/30 opacity-80 transition-opacity duration-300 group-hover:opacity-100" />
+            <div
+              className="absolute top-4 right-4 bg-white/20 p-2 rounded-full border border-white/30 transition-colors hover:bg-white/40 isolate">
+              <Heart
+                size={18}
+                className=" text-white hover:fill-red-600 hover:text-red-600"
               />
-               <div className="absolute top-2 right-2 bg-gray-300 p-1 rounded-xl">
-                <Heart size={18} className=" text-gray-500 hover:fill-red-600 hover:text-red-600"/></div>
-
             </div>
-            <div className="h-2/3 flex flex-col items-left justify-between p-2">
-              <div className="flex justify-between text-sm font-medium text-gray-300">
-                <p className="flex items-center gap-1">
-                  <Calendar size={15} />
-                  Date:{blog.publishedDate}
-                </p>
-                <p className="flex text-sm font-medium items-center gap-2 ">
-                  <Clock size={15} />
-                  {blog.readTime}
-                </p>
-              </div>
-              <div className="flex flex-col gap-2">
-                <p className="font-bold">{blog.title}</p>
-
-              <p className="overflow-hidden text-gray-400 line-clamp-2">
-                {blog.content}
-              </p>
-              </div>
-                 <div className="flex gap-2">
-              {blog.tags.map((tag, index) => (
-             
-                <p key={index} className="flex items-center gap-1 text-gray-400">
-                  <Tag size={15}/>{tag}
-                </p>
-            
-              ))}
-                  </div>
-              
-
-              <div className="flex w-full text-gray-400 justify-between border-t-1">
-                <p className="flex w-1/2 items-center gap-2 ">
-                  <User />
-                  {blog.author}
-                </p>
-
-                <Button variant="none" className="text-[rgb(var(--primary-rgb)/0.7)]  4 w-1/2 hover:text-[var(--primary-color)] cursor-pointer" onClick={() => navigate(`/blogs/${blog.id}`)}>
-                  Read Article <ArrowRight />
-                </Button>
-              </div>
+            <div className="absolute top-4 left-4">
+              <span
+                className="bg-[var(--primary-color)] text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full shadow-md"
+              >
+                {blog.category}
+              </span>
             </div>
           </div>
-        ))}
-      </div>
+          <div
+            className="flex-1 flex flex-col justify-between p-6 gap-4 "
+          >
+            <div
+              className="flex flex-wrap items-center text-xs font-medium text-gray-500 justify-between "
+            >
+              <div className="flex items-center gap-1.5">
+                <Calendar
+                  size={14}
+                  className="text-[var(--primary-color)]"
+                />
+                {blog.publishedDate}
+              </div>
+              <div className="flex items-center gap-1.5">
+                <Clock
+                  size={14}
+                  className="text-[var(--primary-color)]"
+                />
+
+                {blog.readTime}
+              </div>
+            </div>
+            <div className="flex flex-col gap-2">
+              <h3
+                className="text-xl font-bold text-gray-900 line-clamp-2 leading-tight group-hover:text-[var(--primary-color)] transition-colors"
+              >
+                {blog.title}
+              </h3>
+
+              <p
+                className="text-gray-600 line-clamp-2 leading-relaxed text-base"
+              >
+                {blog.excerpt}
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2 mt-1">
+              {blog.tags.map((tag, idx) => (
+                <span
+                  key={idx}
+                  className="flex items-center gap-1 bg-gray-50 text-gray-600 text-xs font-medium px-2.5 py-1 rounded-lg border border-gray-100 "
+                >
+                  <Tag
+                    size={12}
+                    className="text-[var(--primary-color)] opacity-70"
+                  />
+
+                  {tag}
+                </span>
+              ))}
+            </div>
+            <hr className="border-gray-100 my-2" />
+            <div
+              className="flex items-center justify-between mt-auto"
+            >
+              <div
+                className="flex items-center gap-2 text-sm font-semibold text-gray-800 "
+              >
+                <div
+                  className="p-1.5 bg-gray-100 rounded-full text-gray-500 "
+                >
+                  <User size={14} />
+                </div>
+                {blog.author.name}
+              </div>
+              <Button
+                variant="ghost"
+                className="font-bold text-[var(--primary-color)] hover:bg-[var(--primary-color)]/10 hover:text-[var(--primary-color)] px-4 py-2 rounded-full transition-colors"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  navigate(`/blogs/${blog.id}`);
+                }}
+              >
+                Read Article
+                <ArrowRight size={16} className="ml-2" />
+              </Button>
+            </div>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
