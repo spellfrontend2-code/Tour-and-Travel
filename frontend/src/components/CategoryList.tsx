@@ -58,7 +58,6 @@ function CategoryList({
   { id: "all", name: "All" },
   ...categories,
 ];
-console.log(categoriesWithAll)
   const [activeCategory, setActiveCategory] = useState(categoriesWithAll[0].id);
 useEffect(() => {
   onCategoryChange(activeCategory);

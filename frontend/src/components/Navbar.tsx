@@ -271,15 +271,16 @@ function Navbar({
         </div>
       ) : (
         <div
-          className={`fixed cursor-pointer ${menuOpen ? "left-[220px] top-6" : "left-4 top-4"} z-50`}
+          className={`fixed cursor-pointer ${menuOpen ? "left-[220px] top-6" : "left-4 top-4"} z-50 cursor-pointer`}
         >
           {!menuOpen ? (
             <Menu
-              color={"white"}
+              color={"black"}
               onClick={() => {
                 setMenuOpen(true);
                 setNavbarCollapse(false);
               }}
+              className="w-full h-full bg-[rgb(var(--primary-rgb)/0.3)] rounded-full p-2"
             />
           ) : (
             <X color={"white"} onClick={() => setMenuOpen(false)} />

@@ -14,19 +14,19 @@ function DestinationDetail() {
   const {id}=useParams();
   const Destination = Destinations.find((dest) => dest.id == Number(id));
   return (
-    <div>
+    <div >
       <div>
         <div className="relative w-full h-120">
-          <div className="absolute inset-0 bg-gradient-to-t from-white via-white/10 to-transparent"></div>
+          <div className="absolute p-15 inset-0 bg-gradient-to-t from-white via-white/10 to-transparent"></div>
           <img
             src={Destination?.image}
             alt="Destination"
             className="w-full h-full object-cover"
           />
-          <Button variant="blurButton"
-            className="absolute inset-0  text-sm m-3  text-white 
-            h-[20px] w-[150px] pointer-events-auto cursor-pointer
-             hover:bg-gray-600"
+          <Button variant="transparentButton"
+            className="absolute inset-0 text-sm m-6  text-white 
+            w-[150px] pointer-events-auto cursor-pointer
+             hover:bg-gray-300/60 border-white"
             onClick={() => window.history.back()}
           >
             <ArrowLeft size={15} />
@@ -41,7 +41,7 @@ function DestinationDetail() {
                 {Destination?.region}
               </Button>
               <Button
-                variant="blurButton"
+                variant="transparentButton"
                 className="flex items-center gap-2 uppercase w-[100px] font-bold text-white"
               >
                 {Destination?.tours} Tours
@@ -103,7 +103,7 @@ function DestinationDetail() {
               </ol>
             </div>
           </div>
-          <div className="border-2 h-[200px] p-3 m-3 bg-white/80  rounded-xl border-gray-100 text-gray-900">
+          <div className="sticky top-4 self-start border-2 h-[200px] p-3 m-3 bg-white/80  rounded-xl border-gray-100 text-gray-900">
             <p className="text-2xl m-2 font-bold flex items-center gap-2">
               <Calendar size={25} color="var(--primary-color)" /> Travel Guide Details
             </p>

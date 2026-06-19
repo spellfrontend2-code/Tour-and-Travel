@@ -632,7 +632,7 @@ export function PackageForm() {
               <Calendar
                 mode="single"
                 selected={departure}
-                onSelect={(date) => setValue("departure", date)}
+                onSelect={(date) => {setValue("departure", date)}}
                 disabled={(date) => date < new Date()}
               />
             </PopoverContent>

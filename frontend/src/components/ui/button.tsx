@@ -22,18 +22,18 @@ const buttonVariants = cva(
         none: "bg-transparent border-none p-0 hover:bg-transparent w-full hover:text-inherit",
         navActive:
           "w- full hover:text-white hover:bg-gray-700/60 justify-start",
-        viewButton:
-          "w-full text-white bg-gray-800 b-2 border-gray-700 cursor-pointer hover:bg-gray-700 hover:text-white",
-        greenTransparentButton:
+          greenTransparentButton:
           "pointer-events-none border-1 border-[rgb(var(--primary-rgb)/0.3)] rounded-xl p-1 text-xs font-bold text-[var(--primary-color)] bg-[rgb(var(--primary-rgb)/0.1)]",
         ratingButton:
-          "pointer-events-none border-1 border-yellow-300 rounded-xl p-1 text-xs font-bold text-yellow-300 bg-yellow-100/10",
+          "pointer-events-none bg-yellow-400/20 rounded-xl font-bold border border-yellow-400/30 text-yellow-400 font-bold text-xs",
         greenSolidButton:
           "pointer-events-none p-1 bg-[var(--primary-color)] font-bold text-white rounded-xl",
-        greyButton:"w-full cursor-pointer bg-gray-800/80 text-white border-1 border-gray-700 rounded-xl hover:bg-gray-700/50 hover:border-gray-700 hover:text-white focus-visible:!outline-none focus-visible:!ring-0 focus-visible:ring-offset-0",
-        blurButton:"pointer-events-none w-full border rounded-xl border-white bg-backdrop-blur-lg bg-gray-300/60 border border-gray-200/80",  
+          greenSolidViewButton:
+          "cursor-pointer p-1 hover:bg-[var(--primary-color)] font-bold text-white rounded-2xl bg-[rgb(var(--primary-rgb)/0.9)] border border-[var(--primary-color)] transition-all duration-300 ease-in-out",
+          greyButton:"w-full cursor-pointer bg-gray-800/80 text-white border-1 border-gray-700 rounded-xl hover:bg-gray-700/50 hover:border-gray-700 hover:text-white focus-visible:!outline-none focus-visible:!ring-0 focus-visible:ring-offset-0",
       whiteButton:"w-full pointer-events-none border border-white  bg-white border border-gray-200/80",
-      },
+    transparentButton:"w-full pointer-events-none bg-white/20 px-3 py-1.5 rounded-full border border-white/30 shadow-sm",
+   },
       size: {
         default:
           "h-8 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",

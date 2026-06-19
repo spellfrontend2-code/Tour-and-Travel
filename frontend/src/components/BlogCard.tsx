@@ -13,7 +13,7 @@ function BlogCard({ Blogs }) {
         return (
           <div
             key={index}
-            className="group flex flex-col rounded-2xl bg-white cursor-pointer text-sm border border-gray-100 shadow-sm hover:shadow-2xl hover:border-gray-200 transition-all duration-300"
+            className="group flex flex-col rounded-2xl bg-white cursor-pointer text-sm border border-gray-100 shadow-sm  hover:border-gray-200 transition-all duration-300"
           >
             <div className="relative h-56 overflow-hidden rounded-t-2xl">
               <img
@@ -89,8 +89,7 @@ function BlogCard({ Blogs }) {
                   {blog.author.name}
                 </div>
                 <Button
-                  variant="ghost"
-                  className="font-bold text-[var(--primary-color)] hover:bg-[var(--primary-color)]/10 hover:text-[var(--primary-color)] px-4 py-2 rounded-full transition-colors"
+                  variant="greenSolidViewButton"
                   onClick={(e) => {
                     e.stopPropagation();
                     navigate(`/blogs/${blog.id}`);

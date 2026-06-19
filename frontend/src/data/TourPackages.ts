@@ -174,7 +174,36 @@ const TourPackages = [
         title: "Drive to Nayapul & Trek to Ghandruk",
         description: "Begin trekking through traditional villages.",
       },
-      // ...days 3-10
+      {
+        day: 3,
+        title: "Drive to Nayapul & Trek to Ghandruk",
+        description: "Begin trekking through traditional villages.",
+      },
+      {
+        day: 4,
+        title: "Drive to Nayapul & Trek to Ghandruk",
+        description: "Begin trekking through traditional villages.",
+      },
+      {
+        day: 5,
+        title: "Drive to Nayapul & Trek to Ghandruk",
+        description: "Begin trekking through traditional villages.",
+      },
+      {
+        day: 6,
+        title: "Drive to Nayapul & Trek to Ghandruk",
+        description: "Begin trekking through traditional villages.",
+      },
+      {
+        day: 7,
+        title: "Drive to Nayapul & Trek to Ghandruk",
+        description: "Begin trekking through traditional villages.",
+      },
+      {
+        day: 8,
+        title: "Drive to Nayapul & Trek to Ghandruk",
+        description: "Begin trekking through traditional villages.",
+      },
     ],
   },
 

@@ -73,14 +73,14 @@ function TourPackageCard({ TourPackages }: any) {
                 {pkg.packages.map((p, i) => (
                   <div
                     key={i}
-                    className="flex flex-col text-center justify-between bg-gray-50 rounded-lg p-2 bg-white border-2 border-gray-100 w-[120px] hover:border-[rgb(var(--primary-rgb)/0.3)] hover:text-[var(--primary-color)]"
+                    className=" group/card flex flex-col text-center justify-between bg-gray-50 rounded-lg p-2 bg-white border-2 border-gray-100 w-[120px] hover:border-[rgb(var(--primary-rgb)/0.3)] hover:text-[var(--primary-color)]"
                   >
                     <p
                       className="text-xs font-bold text-gray-500"
                     >
                       {p.name}
                     </p>
-                    <p className="font-bold ">
+                    <p className="font-bold text-black group-hover/card:text-[var(--primary-color)]   ">
                       {pkg.currency}
                       {p.price}
                     </p>
@@ -125,8 +125,8 @@ function TourPackageCard({ TourPackages }: any) {
             {/* Button */}
             <div className="w-full ">
               <Button
-                className="w-full cursor-pointer bg-[var(--primary-color)] hover:bg-[rgb(var(--primary-rgb)/0.9)]"
-                variant="default"
+                className="w-full"
+                variant="greenSolidViewButton"
                 onClick={(e) => {
                   e.stopPropagation();
                   navigate(`/tours/${pkg.id}`);

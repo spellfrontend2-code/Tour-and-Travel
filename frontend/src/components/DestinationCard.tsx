@@ -44,15 +44,16 @@ function DestinationCard({ Destinations }: any) {
       hover:text-red-600
     `} />
             </div>
-            <div
-              className="absolute top-4 left-4 bg-white/20 px-3 py-1.5 rounded-full border border-white/30 shadow-sm"
+            <Button
+            variant="transparentButton"
+              className="absolute top-4 left-4 w-[80px]"
             >
               <p
                 className="text-white text-xs font-bold tracking-wider uppercase"
               >
                 {dest.tours} Tours
               </p>
-            </div>
+            </Button>
             <div
               className="absolute bottom-4 left-4 right-4 flex justify-between items-end"
             >
@@ -73,20 +74,20 @@ function DestinationCard({ Destinations }: any) {
                 </p>
               </div>
 
-              <div
-                className="flex items-center gap-1 bg-yellow-400/20 px-2 py-1 rounded-lg border border-yellow-400/30"
+              <Button
+              variant="ratingButton"
+                className="flex items-center gap-1 "
               >
                 <Star
-                  className="fill-yellow-400 text-yellow-400"
+                  className="fill-yellow-400"
                   size={14}
                 />
 
                 <span
-                  className="text-yellow-400 font-bold text-xs"
                 >
                   {dest.rating}
                 </span>
-              </div>
+              </Button>
             </div>
           </div>
           <div
@@ -98,7 +99,8 @@ function DestinationCard({ Destinations }: any) {
               {dest.description}
             </p>
             <Button
-              className="w-full mt-2 bg-[var(--primary-color)] cursor-pointer hover:bg-[rgb(var(--primary-rgb)/0.9)] text-white border border-gray-200 hover:border-transparent transition-all duration-300 rounded-xl py-6 font-semibold shadow-sm hover:shadow-md "
+              className="w-full "
+              variant="greenSolidViewButton"
               onClick={(e) => {
                 e.stopPropagation();
                 navigate(`/destinations/${dest.id}`);

@@ -13,7 +13,7 @@ const {
 } = useFilters(TourPackages, "country");
 
 return(
-<div className="m-10">
+<div className="p-15">
 <p className="text-[var(--primary-color)] text-sm
 font-medium">
 Popular Packages

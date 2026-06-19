@@ -10,6 +10,7 @@ import {
   Mountain,
   Plus,
   Star,
+  TorusIcon,
   Users,
   X,
 } from "lucide-react";
@@ -44,7 +45,12 @@ function TourDetail() {
     },
   });
   const onSubmit = (data: any) => {
-    console.log(data);
+    const payload={
+      TourId: Tour?.id,
+      selectedPackage: selectedPackage,
+      ...data
+    }
+    console.log(payload);
   };
   const departureDate = watch("departureDate");
   const numberOfTraveller = watch("numberOfTraveller");
@@ -52,65 +58,71 @@ const price =
   (selectedPackage?.price ?? 0) *
   Number(numberOfTraveller);
     return (
-    <div className="flex flex-col gap-2 m-10">
-      <section>
-        <Button variant={"default"} onClick={() => window.history.back()} className="cursor-pointer"><ArrowLeft/>Back to Gallery</Button>
-        <div>
-          <p className="flex gap-1 items-center text-(--primary-color) font-medium ">
-            <MapPin size={20} />
-            {Tour?.region},{Tour?.country}
-          </p>
-        </div>
-        <div className="flex justify-between">
-          <p className="font-bold text-lg">{Tour?.name}</p>
-          <div className="flex gap-2 text-sm items-center">
-            <Button variant="greenTransparentButton" className="">
-              {Tour?.location}
-            </Button>
-            <Button variant="ratingButton" className="flex gap-1 items-center">
-              <Star className="fill-yellow-300 text-yellow-300" size={15} />
-              {Tour?.rating}
-            </Button>
-          </div>
-        </div>
-      </section>
+    <div className="flex flex-col">
       <section className="relative group rounded-lg overflow-hidden">
         <img
           src={Tour?.image}
           alt={Tour?.name}
           className="w-full h-[400px]  object-cover group-hover:scale-105 duration-300 ease-in-out"
         />
+         <Button variant={"transparentButton"}  
+         onClick={() => window.history.back()}   
+         className="absolute inset-0 text-sm m-6  text-white 
+            w-[150px] pointer-events-auto cursor-pointer
+             hover:bg-gray-300/60 border-white">
+          <ArrowLeft/>Back to Gallery</Button>
+       <div className="absolute top-0 right-0 flex gap-2 text-sm m-6">
+            <Button variant="greenSolidButton" className="">
+              {Tour?.location}
+            </Button>
+            <Button variant="ratingButton" className="flex gap-1 items-center">
+              <Star className="fill-yellow-400" size={15} />
+              {Tour?.rating}
+            </Button>
+          </div>
         <div className="flex justify-center  p-5 gap-10 absolute bottom-0 w-full">
           <Button
-            variant="greenTransparentButton"
-            className="flex items-center gap-2"
+            variant="transparentButton"
+            className="flex items-center gap-2 w-[230px]"
           >
-            <Clock size={15} />
+            <Clock size={15} color="var(--primary-color)" />
             <p className="text-white">
               {Tour?.days} days/ {Tour?.nights} nights
             </p>
           </Button>
           <Button
-            variant="greenTransparentButton"
-            className="flex items-center gap-2"
+            variant="transparentButton"
+            className="flex items-center gap-2 w-[230px]"
           >
-            <Mountain size={15} />
+            <Mountain size={15} color="var(--primary-color)" />
             <p className="text-white">
               Maximum Altitude: {Tour?.maxAltitude}
             </p>
           </Button>
           <Button
-            variant="greenTransparentButton"
-            className="flex items-center gap-2"
+            variant="transparentButton"
+            className="flex items-center gap-2 w-[230px]"
           >
-            <Users size={15} />
+            <Users size={15} color="var(--primary-color)"/>
             <p className="text-white">
               Group Size: {Tour?.groupSize} pax
             </p>
           </Button>
         </div>
       </section>
-      <section className="flex gap-3 w-full">
+       <div className="px-10 py-3 flex flex-col gap-5"><div>
+      
+        <div className="flex justify-between">
+          <p className="font-bold text-xl">{Tour?.name}</p>
+          
+        </div>
+            <p className="flex gap-1 items-center text-(--primary-color) font-medium ">
+            <MapPin size={20} />
+            {Tour?.region},{Tour?.country}
+          </p>
+        </div>
+      <section className=" flex gap-3 w-full">
+        
         <aside className="flex flex-col gap-5 w-3/4">
           <div className="text-gray-500 text-base border-1 h-auto w-full rounded-lg p-4">
             <p className="font-bold text-2xl text-black">
@@ -200,7 +212,7 @@ const price =
             <Timeline itinerary={Tour?.itinerary} />
           </div>
         </aside>
-        <aside className="flex flex-col gap-5 w-1/4">
+        <aside className="flex flex-col gap-5 w-1/4 fixed sticky top-4 self-start">
           <div className="border-1 rounded-lg h-auto p-4 ">
             <p className="text-2xl font-bold">Book Packages</p>
             <hr className="my-3" />
@@ -315,6 +327,7 @@ const price =
           </div>
         </aside>
       </section>
+      </div>
     </div>
   );
 }

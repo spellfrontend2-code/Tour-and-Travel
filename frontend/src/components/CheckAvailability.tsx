@@ -79,7 +79,7 @@ function CheckAvailability() {
           className="absolute inset-0 flex flex-col items-center justify-center gap-6 text-white px-4 font-sans text-center pb-24"
         >
           <Button
-            variant="blurButton"
+            variant="transparentButton"
             className="w-[180px] sm:w-[200px] md:w-[250px] lg:w-[250px]"
           >
             <span

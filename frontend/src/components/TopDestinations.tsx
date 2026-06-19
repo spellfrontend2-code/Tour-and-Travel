@@ -57,7 +57,7 @@ function TopDestinations({ Destinations }:any) {
         )}
       />
       <div className="flex justify-center mt-6 sm:mt-10">
-        <Button className=" bg-[var(--primary-color)] hover:bg-[rgb(var(--primary-rgb)/0.3)] hover:text-[var(--primary-color)] hover:cursor-pointer">
+        <Button variant="greenSolidViewButton" onClick={()=>{navigate("/destinations");window.scrollTo(0, 0);}}>
           <MapPin />
           View All Destinations
         </Button>
