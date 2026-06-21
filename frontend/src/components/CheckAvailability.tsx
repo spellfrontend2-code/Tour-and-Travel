@@ -126,7 +126,7 @@ function CheckAvailability() {
         </div>
 
         <div
-          className={`bg-white border border-gray-300 w-full h-full rounded-b-lg `}
+          className={`bg-white border border-gray-300 w-full h-[200px] rounded-b-lg `}
         >
           {activeTab.content}
         </div>

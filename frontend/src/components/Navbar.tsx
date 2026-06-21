@@ -15,7 +15,7 @@ import {
   Mountain,
   PoundSterling,
   Pyramid,
-  Settings,
+  // Settings,
   User,
   Users,
   X,
@@ -73,7 +73,7 @@ function Navbar({
   const CurrencyIcon = selectedCurrency.symbol;
   return (
     <div
-      className={`relative h-screen ${isSmallScreen ? "w-0" : navbarCollapse ? "w-20" : "w-64"} transition-all duration-300 `}
+      className={`relative h-screen ${isSmallScreen ? "w-0" : navbarCollapse ? "w-[80px]" : "w-[250px]"} transition-all duration-300 `}
     >
       {isSmallScreen && menuOpen && (
         <div
@@ -83,9 +83,9 @@ function Navbar({
       )}
       {(!isSmallScreen || menuOpen) && (
         <nav
-          className={`relative flex flex-col p-4 bg-gray-900 text-gray-300 overflow-y-auto scrollbar-none transition-all duration-300 ${isSmallScreen ? `fixed left-0 top-0 z-50 h-screen w-64 shadow-xl` : "w-full h-screen"}`}
+          className={`relative flex flex-col p-4 bg-gray-900 text-white overflow-y-auto scrollbar-none transition-all duration-300 ${isSmallScreen ? `fixed left-0 top-0 z-50 h-screen w-64 shadow-xl` : "w-full h-screen"}`}
         >
-          <div className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2" >
             <img src={Logo} className="w-10" />
 
             <span
@@ -93,9 +93,9 @@ function Navbar({
             >
               Tour & Travel
             </span>
-          </div>
+          </Link>
           <hr className="my-4 border-t border-gray-300" />
-          <section className="space-y-1.5 flex flex-col w-full">
+          <section className="space-y-1.5 flex flex-col w-full ">
             {navItems.map((item) => {
               const isActive =
                 location.pathname === item.path ||
@@ -103,22 +103,21 @@ function Navbar({
               return (
                 <Link
                   key={item.label}
-                  to={item.path}
-                  className="w-full focus:outline-none"
+                  to={item.path} 
                 >
                   <Button
                     variant="none"
-                    className={`w-full flex items-center justify-start gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 group ${isActive ? "bg-[var(--primary-color)]/10 text-[var(--primary-color)] font-bold" : "hover:bg-slate-900 text-slate-400 hover:text-white font-medium"}`}
+                    className={`w-full flex items-center justify-start gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 font-semibold group ${isActive ? "bg-[var(--primary-color)]/10 text-[var(--primary-color)]" : "hover:bg-[var(--primary-color)]/10 text-white hover:text-gray-300 "}`}
                     title={item.label}
                   >
                     <item.icon
                       size={20}
                       strokeWidth={isActive ? 2.5 : 2}
-                      className={`shrink-0 transition-colors ${isActive ? "text-[var(--primary-color)]" : "text-slate-400 group-hover:text-white"}`}
+                      className={`shrink-0  transition-colors ${isActive ? "text-[var(--primary-color)]" : "text-white group-hover:text-gray-300"}`}
                     />
 
                     <span
-                      className={`whitespace-nowrap transition-all duration-300 ${navbarCollapse ? "hidden" : "block"}`}
+                      className={`whitespace-nowrap  transition-all duration-300 ${navbarCollapse ? "hidden" : "block"}`}
                     >
                       {item.label}
                     </span>
@@ -201,7 +200,7 @@ function Navbar({
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <Link to="/settings" className="w-full focus:outline-none">
+            {/* <Link to="/settings" className="w-full focus:outline-none">
               <Button
                 variant="none"
                 className={`w-full flex items-center ${navbarCollapse ? "justify-center" : "justify-start"} gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:bg-slate-900 hover:text-white transition-all`}
@@ -211,10 +210,10 @@ function Navbar({
                   Settings
                 </span>
               </Button>
-            </Link>
+            </Link> */}
           </section>
           <hr className="my-4 border-t border-gray-300" />
-          <section className="space-y-4">
+          <section className={`space-y-4 flex flex-wrap  ${navbarCollapse?"justify-center":"justify-between"} `}>
             {user ? (
               <>
                 <Link
@@ -240,9 +239,9 @@ function Navbar({
                   className="flex items-center gap-2 text-red-500"
                 >
                   <LogOut size={20} />{" "}
-                  <p className={`${navbarCollapse ? "hidden" : "block"}`}>
+                  {/* <p className={`${navbarCollapse ? "hidden" : "block"}`}>
                     Log Out
-                  </p>
+                  </p> */}
                 </Link>
               </>
             ) : (

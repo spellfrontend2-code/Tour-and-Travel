@@ -8,10 +8,20 @@ function BlogDetail() {
   return (
     <div className="m-10">
       <section className="">
-        <Button variant="default" className="cursor-pointer" onClick={() => window.history.back()}><ArrowLeft/>Back to Gallery</Button>
-        <Button variant="greenTransparentButton">
+      <div className="flex flex-col w-fit gap-3">
+<Button
+  variant="transparentButton"
+  onClick={() => {
+    window.history.back();
+  }}
+  className="pointer-events-auto cursor-pointer"
+>
+  <ArrowLeft />
+  Back to Gallery
+</Button>          <Button variant="greenTransparentButton" >
           {Blog?.category}
         </Button>
+        </div>
         <p className="text-2xl font-bold">{Blog?.title}</p>
         <div className="flex gap-2 items-center text-gray-300 font-medium text-sm">
           <p className="flex items-center gap-2">
@@ -37,12 +47,13 @@ function BlogDetail() {
           alt={`${Blog?.title}`}
           className="w-full h-[400px] rounded-lg object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out"
         /></div>
+        <div className="flex gap-3 my-5">{Blog?.tags.map((tag) => 
+          <div className="border-1 rounded-lg p-1 text-sm font-bold text-gray-500 flex gap-2 items-center"><Tag size={15}/>{tag}</div>)}</div>
         <p className="my-5 h-auto">{Blog?.content}</p>
       </section>
       <hr className="my-5" />
-      <section className="">
-       <div className="flex gap-3 my-5">{Blog?.tags.map((tag) => <div className="border-1 rounded-lg p-1 text-sm font-bold text-gray-500 flex gap-2 items-center"><Tag size={15}/>{tag}</div>)}</div>
-        <div className="flex gap-2 w-full h-[80px] bg-gray-100/50 border-1 rounded-lg p-3">
+         <section className="">
+        <div className="flex gap-2 w-full bg-gray-100/50 border-1 rounded-lg p-3">
           <img
             src={Blog?.author.profileImg}
             alt="{Blog?.author.name}"

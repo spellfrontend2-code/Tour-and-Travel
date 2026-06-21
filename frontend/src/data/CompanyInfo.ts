@@ -1,11 +1,12 @@
 import pic1 from "../assets/destinations/1.jfif";
 import pic2 from "../assets/destinations/2.jfif";
+import logo from "../assets/logo/logo.png"
 import pic3 from "../assets/destinations/3.jfif";
 import pic4 from "../assets/destinations/4.jfif";
 import pic5 from "../assets/destinations/5.jfif";
  const CompanyInfo = {
-  logo: pic1,
-  name: "Access Nepal Tour and Trekking Pvt. Ltd",
+  logo: logo,
+  name: "Tour and Trekking Pvt. Ltd",
 
   address: "Amrit Marga, Thamel, Kathmandu, Nepal",
   phone: "+977 9841021636",

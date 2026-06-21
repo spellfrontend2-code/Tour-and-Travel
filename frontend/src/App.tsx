@@ -13,6 +13,7 @@ import WishList from "./pages/WishList";
 import Bookings from "./pages/Bookings";
 import About from "./pages/About";
 import DealDetail from "./pages/DealDetail";
+import Profile from "./pages/Profile";
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
           <Route path="/blogs" element={<BlogList />} />
           <Route path="/blogs/:id" element={<BlogDetail />} />
           <Route path="/about" element={<About/>}/>
+           <Route path="/profile" element={<Profile/>}/>
         </Route>
       </Routes>
     </>

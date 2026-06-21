@@ -13,7 +13,10 @@ const TourPackages = [
     days: 14,
     nights: 13,
     maxAltitude: "5,364m",
-    groupSize: "4-12",
+    groupSize: {
+      min: 2,
+      max: 5,
+    },
     currency: "$",
     image: pic1,
 
@@ -103,7 +106,10 @@ const TourPackages = [
     days: 10,
     nights: 9,
     maxAltitude: "4,130m",
-    groupSize: "4-15",
+    groupSize: {
+      min: 2,
+      max: 10,
+    },
     currency: "$",
     image: pic2,
 
@@ -217,7 +223,9 @@ const TourPackages = [
     days: 8,
     nights: 7,
     maxAltitude: "3,870m",
-    groupSize: "2-12",
+    groupSize:{
+      min: 2,
+      max: 10},
     currency: "$",
     image: pic3,
 
@@ -300,7 +308,9 @@ const TourPackages = [
     days: 16,
     nights: 15,
     maxAltitude: "5,160m",
-    groupSize: "2-10",
+    groupSize: {
+      min: 2,
+      max: 10},
     currency: "$",
     image: pic4,
 

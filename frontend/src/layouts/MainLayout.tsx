@@ -54,9 +54,11 @@ useEffect(() => {
       </div>
 
       {/* Page content */}
-      <main ref={mainRef} className=" overflow-y-auto h-screen w-full"   style={{ paddingBottom: footerHeight }}>
+      <main ref={mainRef} className=" overflow-y-auto h-screen w-full"   
+      //style={{ paddingBottom: footerHeight }}
+      >
         <Outlet />
-            <div ref={footerRef} className="w-full fixed bottom-0 right-0 z-40 transition-all duration-300" style={{left:navbarWidth, width:`calc(100% - ${navbarWidth})`}}>
+            <div ref={footerRef} className="w-full  bottom-0 right-0 z-40 transition-all duration-300" style={{left:navbarWidth}}>
       <Footer/>
       </div>
       </main>
