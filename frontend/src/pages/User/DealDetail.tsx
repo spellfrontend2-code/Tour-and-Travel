@@ -13,7 +13,7 @@ import {
   Users,
   X,
 } from "lucide-react";
-import Deals from "../data/Deals";
+import Deals from "@/data/Deals";
 import { useParams } from "react-router-dom";
 import Countdown from "react-countdown";
 

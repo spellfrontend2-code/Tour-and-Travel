@@ -8,7 +8,7 @@ import {
   Star,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Destinations from "../data/Destinations";
+import Destinations from "@/data/Destinations";
 import { useParams } from "react-router-dom";
 function DestinationDetail() {
   const {id}=useParams();

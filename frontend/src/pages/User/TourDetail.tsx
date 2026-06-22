@@ -24,7 +24,7 @@ import {
 import { Calendar } from "@/components/ui/calendar";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
-import TourPackages from "../data/TourPackages";
+import TourPackages from "@/data/TourPackages";
 import { Dialog, DialogContent,  DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import ProfileForm from "@/components/ProfileForm";
 type FormData = {

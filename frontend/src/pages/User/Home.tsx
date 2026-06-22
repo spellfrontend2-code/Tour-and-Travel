@@ -1,8 +1,8 @@
 import TopDestinations from "@/components/TopDestinations";
-import CheckAvailability from "../components/CheckAvailability";
+import CheckAvailability from "@/components/CheckAvailability";
 import TourPackageCard from "@/components/TourPackageCard";
 import BlogCard from "@/components/BlogCard";
-import Destinations from "../data/Destinations";
+import Destinations from "@/data/Destinations";
 import TourPackages from "@/data/TourPackages";
 import Blogs from "@/data/Blogs";
 

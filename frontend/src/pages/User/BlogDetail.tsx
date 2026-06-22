@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { CircleUserRound, Circle, Clock, Calendar, Tag, ArrowLeft } from "lucide-react";
-import Blogs from "../data/Blogs";
+import Blogs from "@/data/Blogs";
 import { useParams } from "react-router-dom";
 function BlogDetail() {
   const {id}=useParams();

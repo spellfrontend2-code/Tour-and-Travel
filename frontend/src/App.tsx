@@ -1,25 +1,31 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Home from "./pages/Home";
-import TourDetail from "./pages/TourDetail";
-import DestinationDetail from "./pages/DestinationDetail";
-import DestinationList from "./pages/DestinationList";
 import MainLayout from "./layouts/MainLayout";
-import TourList from "./pages/TourList";
-import BlogList from "./pages/BlogList";
-import BlogDetail from "./pages/BlogDetail";
-import DealList from "./pages/DealList";
-import WishList from "./pages/WishList";
-import Bookings from "./pages/Bookings";
-import About from "./pages/About";
-import DealDetail from "./pages/DealDetail";
-import Profile from "./pages/Profile";
+import Home from "./pages/User/Home";
+import DestinationDetail from "./pages/User/DestinationDetail";
+import DestinationList from "./pages/User/DestinationList";
+import TourList from "./pages/User/TourList";
+import TourDetail from "./pages/User/TourDetail";
+import DealList from "./pages/User/DealList";
+import DealDetail from "./pages/User/DealDetail";
+import WishList from "./pages/User/WishList";
+import Bookings from "./pages/User/Bookings";
+import BlogList from "./pages/User/BlogList";
+import BlogDetail from "./pages/User/BlogDetail";
+import About from "./pages/User/About";
+import Profile from "./pages/User/Profile";
+import Login from "./pages/User/Login";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Dashboard from "./pages/Admin/Dashboard";
+
+
 
 
 function App() {
   return (
     <>
       <Routes>
+        {/*User*/}
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/destinations/:id" element={<DestinationDetail />} />
@@ -33,7 +39,13 @@ function App() {
           <Route path="/blogs" element={<BlogList />} />
           <Route path="/blogs/:id" element={<BlogDetail />} />
           <Route path="/about" element={<About/>}/>
-           <Route path="/profile" element={<Profile/>}/>
+          <Route path="/profile" element={<Profile/>}/>
+        
+        </Route>
+           <Route path="/login" element={<Login/>}/>
+        {/*Admin*/}
+        <Route element={<ProtectedRoute/>}>
+        <Route path="/admin" element={<Dashboard />} />
         </Route>
       </Routes>
     </>
