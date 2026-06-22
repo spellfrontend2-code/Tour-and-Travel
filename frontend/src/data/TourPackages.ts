@@ -46,7 +46,7 @@ const TourPackages = [
     packages: [
             {
         id: 1,
-        name: "Standard",
+        name: "Group",
         price: 1299,
         features: [
           "Shared accommodation",
@@ -56,7 +56,7 @@ const TourPackages = [
       },
       {
         id: 2,
-        name: "Standard Plus",
+        name: "Private",
         price: 1599,
         features: [
           "Private room where available",
@@ -67,7 +67,7 @@ const TourPackages = [
       },
       {
         id: 3,
-        name: "Deluxe",
+        name: "Customized",
         price: 2199,
         features: [
           "Luxury Kathmandu hotel",
@@ -138,7 +138,7 @@ const TourPackages = [
     packages: [
       {
         id: 1,
-        name: "Standard",
+        name: "Group",
         price: 999,
         features: [
           "Shared accommodation",
@@ -148,7 +148,7 @@ const TourPackages = [
       },
       {
         id: 2,
-        name: "Standard Plus",
+        name: "Private",
         price: 1299,
         features: [
           "Private room where available",
@@ -158,7 +158,7 @@ const TourPackages = [
       },
       {
         id: 3,
-        name: "Deluxe",
+        name: "Customized",
         price: 1699,
         features: [
           "Luxury hotel in Pokhara",
@@ -253,7 +253,7 @@ const TourPackages = [
     packages: [
       {
         id: 1,
-        name: "Standard",
+        name: "Group",
         price: 799,
         features: [
           "Shared accommodation",
@@ -262,7 +262,7 @@ const TourPackages = [
       },
       {
         id: 2,
-        name: "Standard Plus",
+        name: "Private",
         price: 999,
         features: [
           "Private room where available",
@@ -271,7 +271,7 @@ const TourPackages = [
       },
       {
         id: 3,
-        name: "Deluxe",
+        name: "Customized",
         price: 1299,
         features: [
           "Best available lodges",
@@ -338,7 +338,7 @@ const TourPackages = [
     packages: [
       {
         id: 1,
-        name: "Standard",
+        name: "Group",
         price: 1499,
         features: [
           "Shared accommodation",
@@ -347,7 +347,7 @@ const TourPackages = [
       },
       {
         id: 2,
-        name: "Standard Plus",
+        name: "Private",
         price: 1799,
         features: [
           "Private room where available",
@@ -356,7 +356,7 @@ const TourPackages = [
       },
       {
         id: 3,
-        name: "Deluxe",
+        name: "Customized",
         price: 2299,
         features: [
           "Private porter",

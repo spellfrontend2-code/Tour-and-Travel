@@ -6,12 +6,12 @@ import useFetchCategories from "@/hooks/useFetchCategories";
 import useFilters from "@/hooks/useFilters";
 
 function DestinationList() {
-  const categories = useFetchCategories(Destinations, "region")||[];
+  const categories = useFetchCategories(Destinations, "country")||[];
 const {
   setCategory,
   setSearch,
   filteredData,
-} = useFilters(Destinations, "region");
+} = useFilters(Destinations, "country");
 
   return (
     <div className="p-15">

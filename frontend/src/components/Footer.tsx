@@ -24,15 +24,20 @@ function Footer() {
             <p className="font-bold">Recognized by</p>
             <hr className="border-white w-[60px] border rounded-2xl mb-1 rounded-full" />
 
-            <div className="h-[30px] w-[30px] flex gap-2">
-              {CompanyInfo.recognizedBy.map((rec) => (
-                <img
-                  src={rec.logo}
-                  alt="logo"
-                  className=" rounded-full h-full w-full"
-                />
-              ))}
-            </div>
+            <div className="flex gap-2">
+  {CompanyInfo.recognizedBy.map((rec) => (
+    <div
+      key={rec.logo}
+      className="h-[30px] w-[30px] rounded-full overflow-hidden"
+    >
+      <img
+        src={rec.logo}
+        alt="logo"
+        className="h-full w-full object-cover"
+      />
+    </div>
+  ))}
+</div>
           </div>
         </section>
         <section className="flex flex-col h-full justify-between">
@@ -40,20 +45,25 @@ function Footer() {
             <p className="font-bold">Company </p>
             <hr className="border-white w-[60px] border rounded-2xl mb-1" />
             {CompanyInfo.companyLinks.map((l) => (
-              <p><Link to={l.link}>{l.name}</Link></p>
+              <p><Link to={l.link} className="inline-block transition-transform duration-300 hover:translate-x-1 ">{l.name}</Link></p>
             ))}
           </div>
           <div>
             <p className="font-bold">Highly Recommended On</p>
             <hr className="border-white w-[60px] border rounded-2xl mb-1 rounded-full" />
 
-            <div className="h-[30px] w-[30px] flex gap-2">
+            <div className=" flex gap-2">
               {CompanyInfo.recommendedOn.map((rec) => (
+                          <div
+      key={rec.logo}
+      className="h-[30px] w-[30px] rounded-full overflow-hidden">
+    
                 <img
                   src={rec.logo}
                   alt="logo"
-                  className=" rounded-full h-full w-full"
+                  className=" rounded-full h-full w-full object-cover"
                 />
+                </div>
               ))}
             </div>
           </div>
@@ -63,20 +73,25 @@ function Footer() {
             <p className="font-bold">Useful Links</p>
             <hr className="border-white w-[60px] border rounded-2xl mb-1" />
             {CompanyInfo.usefulLinks.map((l) => (
-              <p><a href={l.link} target="_blank">{l.name}</a></p>
+              <p><a href={l.link} target="_blank" className="inline-block transition-transform duration-300 hover:translate-x-1 ">{l.name}</a></p>
             ))}
           </div>
           <div>
             <p className="font-bold">Payment Methods</p>
             <hr className="border-white w-[60px] border rounded-2xl mb-1 rounded-full" />
 
-            <div className="h-[30px] w-[30px] flex gap-2">
+            <div className=" flex gap-2">
               {CompanyInfo.paymentMethods.map((pay) => (
+                          <div
+      key={pay.logo}
+      className="h-[30px] w-[30px] rounded-full overflow-hidden"
+    >
                 <img
                   src={pay.logo}
                   alt="logo"
                   className=" rounded-full h-full w-full"
                 />
+                </div>
               ))}
             </div>
           </div>
@@ -84,13 +99,18 @@ function Footer() {
       </div>
       <div className="px-30">
         <div className="flex py-2 justify-between  border-t-2 border-white">
-        <div className="h-[30px] w-[30px] flex gap-2">
-          {CompanyInfo.socialMedia.map((soc) => (
-            <img
+<div className="flex gap-2">          
+  {CompanyInfo.socialMedia.map((soc) => (
+            
+             <div
+      key={soc.logo}
+      className="h-[30px] w-[30px] rounded-full overflow-hidden"
+    ><img
               src={soc.logo}
               alt="logo"
-              className=" rounded-full h-full w-full"
+              className=" rounded-full h-full w-full object-cover"
             />
+            </div>
           ))}
         </div>
       

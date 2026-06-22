@@ -41,7 +41,13 @@ function ProfileForm() {
   const InputStyle =
     "border-2 border-[rgb(var(--primary-rgb)/0.3)] rounded-xl px-2 py-1 focus:outline-none hover:border-[var(--primary-color)]";
 return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center ">
+    <form onSubmit={handleSubmit(onSubmit)} className="p-3 rounded-2xl flex flex-col items-center border-2 border-gray-300">
+           <div className="flex flex-col justify-start items-left w-full px-3">
+          <p className="text-xl font-bold tracking-wide">My Profile</p>
+          <p>
+            Manage your personal information. 
+          </p>
+        </div>
           <div className="w-full h-[500px] p-3 grid grid-cols-1 overflow-y-auto sm:grid-cols-1 md:grid-cols-2 md:text-base sm:text-sm overflow-y-auto gap-4 m-5">
             <InputBox label="Email" id="email" type="email" placeholder="Email" register={register} />
             <InputBox label="Phone" id="phone" type="text" placeholder="Phone" register={register} />
