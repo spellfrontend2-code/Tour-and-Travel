@@ -17,6 +17,7 @@ import Profile from "./pages/User/Profile";
 import Login from "./pages/User/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./pages/Admin/Dashboard";
+import AdminLayout from "./layouts/AdminLayout";
 
 
 
@@ -44,8 +45,10 @@ function App() {
         </Route>
            <Route path="/login" element={<Login/>}/>
         {/*Admin*/}
-        <Route element={<ProtectedRoute/>}>
+        <Route  element={<AdminLayout/>}>
+        <Route   element={<ProtectedRoute/>}>
         <Route path="/admin" element={<Dashboard />} />
+        </Route>
         </Route>
       </Routes>
     </>
