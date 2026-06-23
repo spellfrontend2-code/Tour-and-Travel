@@ -8,7 +8,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import App from "./App.tsx";
 import { WishListProvider } from "./context/WishListContext.tsx";
 import "./index.css";
-import {queryClient} from "./lib/queryClient.ts"
+import {queryClient} from "./services/queryClient.ts"
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
@@ -17,7 +17,7 @@ createRoot(document.getElementById("root")!).render(
           <App />
         </BrowserRouter>
       </WishListProvider>
-          <ReactQueryDevtools initialIsOpen={false} />
+          {/* <ReactQueryDevtools initialIsOpen={false} /> */}
 
     </QueryClientProvider>
   </StrictMode>

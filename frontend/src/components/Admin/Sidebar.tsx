@@ -18,12 +18,12 @@ const navItems = [
 ];
 function Sidebar(){
 return (
-    <div className="bg-gray-900 h-full">
-        <section className="space-y-1.5 flex flex-col w-full ">
+    <div className="bg-gray-600 h-full">
+        <section className="space-y-1.5 flex flex-col w-full pt-5 text-white">
                     {navItems.map((item) => {
-                      const isActive =
-                        location.pathname === item.path ||
-                        (item.path !== "/" && location.pathname.startsWith(item.path));
+                      // const isActive =
+                      //   location.pathname === item.path ||
+                      //   (item.path !== "/" && location.pathname.startsWith(item.path));
                       return (
                         <Link
                           key={item.label}
@@ -31,13 +31,16 @@ return (
                         >
                           <Button
                             variant="none"
-                            className={`w-full flex items-center justify-start gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 font-semibold group ${isActive ? "bg-[var(--primary-color)]/10 text-[var(--primary-color)]" : "hover:bg-[var(--primary-color)]/10 text-white hover:text-gray-300 "}`}
+                            className={`w-full flex items-center justify-start gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 font-semibold group 
+                              
+                              `}
                             title={item.label}
                           >
                             <item.icon
                               size={20}
-                              strokeWidth={isActive ? 2.5 : 2}
-                              className={`shrink-0  transition-colors ${isActive ? "text-[var(--primary-color)]" : "text-white group-hover:text-gray-300"}`}
+                           
+                              className={`shrink-0  transition-colors 
+                                `}
                             />
         
                             <span

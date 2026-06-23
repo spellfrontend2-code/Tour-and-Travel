@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/shared/Navbar";
 import { Outlet, useLocation } from "react-router-dom";
-import Footer from "@/components/Footer";
+import Footer from "@/components/shared/Footer";
 export default function MainLayout() {
   const [navbarCollapse, setNavbarCollapse] = useState(true);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
