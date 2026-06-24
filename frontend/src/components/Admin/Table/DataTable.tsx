@@ -1,3 +1,4 @@
+import { Table, TableBody, TableHeader,TableHead, TableRow, TableCell } from "@/components/ui/table";
 import {
   useReactTable,
   getCoreRowModel,
@@ -11,36 +12,36 @@ function DataTable({ data, columns }) {
     getCoreRowModel: getCoreRowModel(),
   });
   return(
-    <div className="border-2 border-gray-900 rounded-xl overflow-x-auto"> 
-        <table className="">
-        <thead className="bg-gray-100  ">
+    <div > 
+        <Table className="table-fixed w-full">
+        <TableHeader >
             {table.getHeaderGroups().map(hg=>(
-                <tr key={hg.id} className="">
+                <TableRow key={hg.id} className="">
                     {hg.headers.map(header=>(
-                        <th key={header.id} className="px-6 py-3">
+                        <TableHead key={header.id} className="px-6 py-3">
                            <p className="text-left"> {header.isPlaceholder
                                 ? null
                                 : flexRender(
                                     header.column.columnDef.header,
                                     header.getContext()
                                 )}</p>
-                        </th>
+                        </TableHead>
                     ))}
-                </tr>
+                </TableRow>
             ))}
-        </thead>
-        <tbody className="divide-y">
+        </TableHeader>
+        <TableBody >
             {table.getRowModel().rows.map(row=>(
-                <tr key={row.id} className="odd:bg-white even:bg-gray-100">
+                <TableRow key={row.id} >
                     {row.getVisibleCells().map(cell=>(
-                        <td key={cell.id} className="px-6 ">
+                        <TableCell key={cell.id} className="px-6 ">
                             <p className="line-clamp-3 text-sm">{flexRender(cell.column.columnDef.cell, cell.getContext())}
-                        </p></td>
+                        </p></TableCell>
                     ))}
-                </tr>
+                </TableRow>
             ))}
-        </tbody>
-    </table></div>
+        </TableBody>
+    </Table></div>
   )
 }
 export default DataTable;

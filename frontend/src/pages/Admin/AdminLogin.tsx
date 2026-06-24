@@ -1,12 +1,13 @@
-import InputBox from "@/components/shared/InputBox";
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
-import pic from "@/assets/destinations/1.jfif";
 import { Eye, EyeOffIcon } from "lucide-react";
 import { useState } from "react";
 import { authHooks } from "@/features/auth/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "@/context/useAuthStore";
+import { toast } from "sonner";
 function AdminLogin() {
+  const {setAuthData}=useAuthStore();
     const authHook=authHooks();
     const adminLogin=authHook.useAdminLogin();
   const { register, handleSubmit } = useForm({
@@ -20,9 +21,17 @@ const navigate=useNavigate();
   const onSubmit = (data) => {
     adminLogin.mutate(data,{
         onSuccess:(res)=>{
-            localStorage.setItem("token",res.token.access_token);
-            localStorage.setItem("refreshToken",res.token.refresh_token);
-            navigate("/admin");
+              const authData = {
+          user: res.user,
+          // permissions: res.permissions,
+          accessToken: res.token.access_token,
+          refreshToken: res.token.refresh_token,
+          role: res?.roles[0],
+          expiresAt: res.token.expires_in,
+        };
+        setAuthData(authData);
+        toast.success(res.message,{duration:1000});
+        navigate("/admin");
         }
     });
   };
@@ -68,10 +77,11 @@ const navigate=useNavigate();
           </div>
           <Button
             type="submit"
+            disabled={adminLogin.isPending}
             variant="greenSolidViewButton"
             className="w-[40%]"
           >
-            Log In
+           {adminLogin.isPending?"Logging In...":"Log In"}
           </Button>
         </form>
       </div>

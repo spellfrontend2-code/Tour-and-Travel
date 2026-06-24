@@ -6,9 +6,12 @@ import { Eye, EyeOffIcon } from "lucide-react";
 import { useState } from "react";
 import { authHooks } from "@/features/auth/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "@/context/useAuthStore";
+import { toast } from "sonner";
 function Login() {
+  const {setAuthData}=useAuthStore();
     const authHook=authHooks();
-    const adminLogin=authHook.useAdminLogin();
+    const customerLogin=authHook.useCustomerLogin();
   const { register, handleSubmit } = useForm({
     defaultValues: {
       email: "",
@@ -18,10 +21,19 @@ function Login() {
 
 const navigate=useNavigate();
   const onSubmit = (data) => {
-    adminLogin.mutate(data,{
+    customerLogin.mutate(data,{
         onSuccess:(res)=>{
-            localStorage.setItem("token",res.token.access_token);
-            localStorage.setItem("refreshToken",res.token.refresh_token);
+            const authData = {
+          user: res.user,
+          // permissions: res.permissions,
+          accessToken: res.token.access_token,
+          refreshToken: res.token.refresh_token,
+          role: res?.roles[0],
+          expiresAt: res.token.expires_in,
+        };
+
+        setAuthData(authData);
+        toast.success(res.message,{duration:1000});
             navigate("/");
         }
     });
@@ -69,10 +81,11 @@ const navigate=useNavigate();
           </div>
           <Button
             type="submit"
+            disabled={customerLogin.isPending}
             variant="greenSolidViewButton"
             className="w-[40%]"
           >
-            Log In
+            {customerLogin.isPending?"Logging In...":"Log In"}
           </Button>
         </form>
       </div>

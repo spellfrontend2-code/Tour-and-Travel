@@ -1,8 +1,8 @@
-import { Delete, Edit, Eye, View } from "lucide-react";
+import {  Edit, Eye, Trash } from "lucide-react";
 
-export function generateColumns(data = [],hiddenColumns=[]) {
+export function generateColumns(data = [],hiddenColumns=[],  onAction?: (action: string, row: any) => void
+) {
   if (!data.length) return [];
-
   const sample = data[0];
 
 const dynamicColumns = Object.keys(sample)
@@ -22,15 +22,16 @@ const dynamicColumns = Object.keys(sample)
   const actionsColumn = {
     id: "actions",
     header: "ACTIONS",
+
     cell: ({ row }) => {
       const original = row.original;
 
       return (
-        <div className="flex justify-between">
-
-          <Eye strokeWidth={1} size={20} onClick={()=>console.log("view")}/>
-          <Edit strokeWidth={1} color="blue" size={20} onClick={() => {console.log("edit")}}/>
-          <Delete strokeWidth={1} color="red" size={20} onClick={() => {console.log("delete")}}/>
+        <div className="flex gap-3">
+          <Eye className="cursor-pointer text-gray-500 hover:text-gray-900" strokeWidth={1.5} size={20} onClick={() => {onAction?.("view",original)}}/>
+          <Edit className="cursor-pointer text-blue-300 hover:text-blue-500" strokeWidth={1.5}  size={20} onClick={() => {onAction?.("edit",original)}}/>
+          <Trash className="cursor-pointer text-red-300 hover:text-red-500" strokeWidth={1.5} size={20} onClick={() => {onAction?.("delete",original)}}/>
+    
         </div>
 
       );

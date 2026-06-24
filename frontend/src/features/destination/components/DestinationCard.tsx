@@ -73,6 +73,7 @@ function DestinationCard({ Destinations }: any) {
                   {dest?.city?.name}, {dest?.city?.country?.name}
                 </p>
               </div>
+              
 
               <Button
               variant="ratingButton"

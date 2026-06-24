@@ -23,11 +23,13 @@ import AdminTourPackage from "./pages/Admin/AdminTourPackage/AdminTourPackage";
 import AdminBlog from "./pages/Admin/AdminBlog/AdminBlog"
 import Signup from "./pages/User/auth/Signup";
 import AdminLogin from "./pages/Admin/AdminLogin";
+import AdminCountry from "./pages/Admin/AdminCountry/AdminCountry";
 function App() {
   return (
     <>
       <Routes>
         {/*User*/}
+        <Route element={<ProtectedRoute role="customer" navigateRoute="/" />}>
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/destinations/:id" element={<DestinationDetail />} />
@@ -43,13 +45,16 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/profile" element={<Profile />} />
         </Route>
+        </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/adminlogin" element={<AdminLogin />} />
         {/*Admin*/}
-        <Route element={<ProtectedRoute />}>
+        <Route element={<ProtectedRoute role="admin" navigateRoute="/adminlogin" />}>
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<Dashboard />} />
+            <Route path="countries" element={<AdminCountry />} />
+
             <Route path="destinations" element={<AdminDestination />} />
              <Route path="tours" element={<AdminTourPackage />} />
              <Route path="blogs" element={<AdminBlog />} />
