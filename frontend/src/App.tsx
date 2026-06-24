@@ -24,6 +24,7 @@ import AdminBlog from "./pages/Admin/AdminBlog/AdminBlog"
 import Signup from "./pages/User/auth/Signup";
 import AdminLogin from "./pages/Admin/AdminLogin";
 import AdminCountry from "./pages/Admin/AdminCountry/AdminCountry";
+import AdminCity from "./pages/Admin/AdminCity/AdminCity";
 function App() {
   return (
     <>
@@ -58,7 +59,7 @@ function App() {
             <Route path="destinations" element={<AdminDestination />} />
              <Route path="tours" element={<AdminTourPackage />} />
              <Route path="blogs" element={<AdminBlog />} />
-
+            <Route path="cities" element={<AdminCity />} />
           </Route>
         </Route>
       </Routes>

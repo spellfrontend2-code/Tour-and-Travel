@@ -11,7 +11,7 @@ import {
 const navItems = [
   { label: "Dashboard", icon: House, path: "/admin" },
     { label: "Countries", icon: Map, path: "/admin/countries" },
-
+{ label: "Cities", icon: Map, path: "/admin/cities" },
   { label: "Destinations", icon: Map, path: "/admin/destinations" },
   { label: "Tours", icon: Mountain, path: "/admin/tours" },
   { label: "Deals", icon: Pyramid, path: "/admin/deals" },
