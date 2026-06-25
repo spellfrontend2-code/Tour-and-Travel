@@ -28,10 +28,15 @@ const dynamicColumns = Object.keys(sample)
 
       return (
         <div className="flex gap-3">
-          <Eye className="cursor-pointer text-gray-500 hover:text-gray-900" strokeWidth={1.5} size={20} onClick={() => {onAction?.("view",original)}}/>
-          <Edit className="cursor-pointer text-blue-300 hover:text-blue-500" strokeWidth={1.5}  size={20} onClick={() => {onAction?.("edit",original)}}/>
-          <Trash className="cursor-pointer text-red-300 hover:text-red-500" strokeWidth={1.5} size={20} onClick={() => {onAction?.("delete",original)}}/>
-    
+          <div onClick={() => {onAction?.("view",original)}} className="cursor-pointer text-xs font-semibold text-[var(--primary-color)] hover:text-[rgb(var(--primary-rgb)/0.7)] flex gap-1 border-[1.5px] p-1 rounded-xl uppercase border-[var(--primary-color)]"><Eye className="" strokeWidth={1.5} size={15} />
+          view</div>
+          <div className="cursor-pointer text-xs font-semibold text-blue-300 hover:text-blue-500 flex gap-1 border-[1.5px] p-1 rounded-xl uppercase border-blue-300 hover:border-blue-500" onClick={() => {onAction?.("edit",original)}}>
+            <Edit  strokeWidth={1.5}  size={15} />
+          Edit
+          </div>
+          <div className="cursor-pointer text-xs font-semibold text-red-300 hover:text-red-500 flex gap-1 border-[1.5px] p-1 rounded-xl uppercase border-red-300 hover:border-red-500" onClick={() => {onAction?.("delete",original)}}><Trash  strokeWidth={1.5} size={15} />
+    Delete
+    </div>
         </div>
 
       );

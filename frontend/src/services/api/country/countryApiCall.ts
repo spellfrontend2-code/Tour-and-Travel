@@ -17,7 +17,6 @@ export const countryApi=()=>{
     addCountry: async (data: any) => {
       try {
         const response = await axiosInstance.post("/admin/countries", data);
-      console.log(response)
         return response.data;
       } catch (error: any) {
         throw (error?.response?.data

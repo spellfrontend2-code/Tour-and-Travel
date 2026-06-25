@@ -2,7 +2,7 @@ import DataTable from "@/components/Admin/Table/DataTable";
 import { Button } from "@/components/ui/button";
 import { countryHooks } from "@/features/country/hooks/useCountry";
 import { generateColumns } from "@/lib/generateColumns";
-import { PlusSquare } from "lucide-react";
+import { Plus } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -12,6 +12,8 @@ import {
 import {useState } from "react";
 import AddCountry from "@/features/country/components/AddCountry";
 import { toast } from "sonner";
+import DataTableSkeleton from "@/components/Admin/Table/DataTableSkeleton";
+import DeleteDialogBox from "@/components/Admin/Table/AdminShared/DeleteDialogBox";
 
 function AdminCountry() {
   const countryHook = countryHooks();
@@ -24,7 +26,6 @@ function AdminCountry() {
   const [view, setView] = useState(false);
   const Countries = data?.data?.data || [];
   const columns = generateColumns(Countries, [], (action, row) => {
-    console.log("Row from generatedclumns", row);
     setSelectedCountry(row);
     switch (action) {
       case "view":
@@ -42,16 +43,16 @@ function AdminCountry() {
   });
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3 p-15">
       <section className="flex justify-between items-center">
-        <p>Countries</p>
+        <p className="text-3xl text-[var(--primary-color)] font-bold">Countries</p>
         <Button
           variant="greenSolidViewButton"
           className=""
           onClick={() => setAddDialog(true)}
         >
           <p className="flex items-center gap-2">
-            <PlusSquare className="size-5" strokeWidth={2} />
+            <Plus className="size-5" strokeWidth={2} />
             Add New Country
           </p>
         </Button>
@@ -65,9 +66,8 @@ function AdminCountry() {
             setView(false);
           }
         }}
-      >
-        {" "}
-        <DialogContent className="!max-w-[50vw] w-[90vw] h-fit">
+      >        
+      <DialogContent className="!max-w-[50vw] w-[90vw] h-fit">
           <DialogHeader>
             <DialogTitle>
               {edit
@@ -119,9 +119,9 @@ function AdminCountry() {
           </div>
         </DialogContent>
       </Dialog>
+      <DeleteDialogBox deleteOpen={deleteOpen} setDeleteOpen={setDeleteOpen} selectedField={selectedCountry} deleteField={deleteCountry} />
       {isLoading ? (
-        <p>Loading...</p>
-      ) : isError ? (
+<DataTableSkeleton />) : isError ? (
         <p className="text-red-500">Failed to load countries</p>
       ) : Countries.length > 0 ? (
         <DataTable data={Countries} columns={columns} />

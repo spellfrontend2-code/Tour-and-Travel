@@ -12,11 +12,11 @@ function DataTable({ data, columns }) {
     getCoreRowModel: getCoreRowModel(),
   });
   return(
-    <div > 
-        <Table className="table-fixed w-full">
+    <div className="border-2 rounded-xl overflow-x-auto"> 
+        <Table className="w-full table-fixed">
         <TableHeader >
             {table.getHeaderGroups().map(hg=>(
-                <TableRow key={hg.id} className="">
+                <TableRow key={hg.id} className="bg-gray-100 ">
                     {hg.headers.map(header=>(
                         <TableHead key={header.id} className="px-6 py-3">
                            <p className="text-left"> {header.isPlaceholder
@@ -32,7 +32,7 @@ function DataTable({ data, columns }) {
         </TableHeader>
         <TableBody >
             {table.getRowModel().rows.map(row=>(
-                <TableRow key={row.id} >
+                <TableRow key={row.id} className="even:bg-gray-100">
                     {row.getVisibleCells().map(cell=>(
                         <TableCell key={cell.id} className="px-6 ">
                             <p className="line-clamp-3 text-sm">{flexRender(cell.column.columnDef.cell, cell.getContext())}

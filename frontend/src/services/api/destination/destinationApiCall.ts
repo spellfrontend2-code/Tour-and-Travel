@@ -10,9 +10,32 @@ export const destinationApi=()=>{
       } catch (error: any) {
         throw (
           new Error(error?.response?.data?.message) ||
-          "Contact Message Fetch Failed"
+          "Destination Fetch Failed"
         );
       }
     },
+    createDestination:async(data:any)=>{
+      try{
+        const response = await axiosInstance.post("/admin/destinations", data);
+        return response.data;
+      }
+      catch (error: any) {
+        throw (error?.response?.data
+           ||
+          "Country add Failed"
+        );
+      }
+    },
+    deleteDestination:async(id:any)=>{
+      try{
+        const response = await axiosInstance.delete(`/admin/destinations/${id}`);
+        return response.data;
+      }catch(error:any){
+        throw (
+          new Error(error?.response?.data?.message) ||
+          "Destination delete Failed"
+        );
+      }
+    }
     }
 }

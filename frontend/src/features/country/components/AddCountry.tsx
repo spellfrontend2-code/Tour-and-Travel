@@ -3,7 +3,6 @@ import { Asterisk } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { countryHooks } from "../hooks/useCountry";
 import { toast } from "sonner";
-import { useEffect } from "react";
 
 const inputStyle =
   "border-2 border-[rgb(var(--primary-rgb)/0.3)] rounded-xl px-2 py-1 focus:outline-none hover:border-[var(--primary-color)]";
@@ -30,6 +29,7 @@ function AddCountry({ setAddDialog ,edit,setEdit,country,view,setView}: any) {
       name: newCountryData?.name,
       code: newCountryData?.code?.toUpperCase(),
     }
+    console.log(validatedCountryData);
     if(edit){
       editCountry.mutate({data:validatedCountryData,id:country.id}, {
         onSuccess: (res) => {

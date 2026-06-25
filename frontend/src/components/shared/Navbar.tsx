@@ -20,7 +20,7 @@ import {
   Users,
   X,
 } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import { useState } from "react";
 import {
@@ -30,6 +30,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Logo from "@/assets/hero.png";
+import { useAuthStore } from "@/context/useAuthStore";
+import { toast } from "sonner";
 const Languages = [
   { label: "en", value: "English" },
   { label: "es", value: "Spanish" },
@@ -40,7 +42,7 @@ const Currencies = [
   { label: "EUR", value: "EUR", symbol: Euro },
   { label: "GBP", value: "GBP", symbol: PoundSterling },
 ];
-const user = { name: "John Doe", avatar: "https://i.pravatar.cc/150?img=3" };
+// const user = { name: "John Doe", avatar: "https://i.pravatar.cc/150?img=3" };
 // const user = null;
 const navItems = [
   { label: "Home", icon: House, path: "/" },
@@ -65,12 +67,20 @@ function Navbar({
   isSmallScreen,
 }: NavbarProps) {
   const location = useLocation();
+  const {authData}=useAuthStore();
+  const user=authData?.user
   const [languageOpen, setLanguageOpen] = useState(false);
   const [currencyOpen, setCurrencyOpen] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState(Languages[0].value);
   const [selectedCurrency, setSelectedCurrency] = useState(Currencies[0]);
   const [menuOpen, setMenuOpen] = useState(false);
   const CurrencyIcon = selectedCurrency.symbol;
+  const navigate=useNavigate()
+  const handleLogout=()=>{
+    localStorage.removeItem("auth");
+    toast.success("Logged out successfully");
+    navigate("/login");
+  }
   return (
     <div
       className={`relative h-screen ${isSmallScreen ? "w-0" : navbarCollapse ? "w-[80px]" : "w-[250px]"} transition-all duration-300 `}
@@ -213,7 +223,7 @@ function Navbar({
             </Link> */}
           </section>
           <hr className="my-4 border-t border-gray-300" />
-          <section className={`space-y-4 flex flex-wrap  ${navbarCollapse?"justify-center":"justify-between"} `}>
+          <section className={`flex flex-wrap  ${navbarCollapse?"flex-col items-center gap-3":"justify-between"} `}>
             {user ? (
               <>
                 <Link
@@ -234,15 +244,15 @@ function Navbar({
                     {user?.name}
                   </span>
                 </Link>
-                <Link
+                {/* <Link
                   to="/login"
                   className="flex items-center gap-2 text-red-500"
-                >
-                  <LogOut size={20} />{" "}
+                > */}
+                  <LogOut size={20} color="red" strokeWidth={2} className="cursor-pointer" onClick={handleLogout}/>
                   {/* <p className={`${navbarCollapse ? "hidden" : "block"}`}>
                     Log Out
                   </p> */}
-                </Link>
+                {/* </Link> */}
               </>
             ) : (
               <Link

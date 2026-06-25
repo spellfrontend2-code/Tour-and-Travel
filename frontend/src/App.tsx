@@ -30,7 +30,7 @@ function App() {
     <>
       <Routes>
         {/*User*/}
-        <Route element={<ProtectedRoute role="customer" navigateRoute="/" />}>
+        <Route element={<ProtectedRoute role={["customer","admin"]} navigateRoute="/" />}>
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/destinations/:id" element={<DestinationDetail />} />
@@ -51,7 +51,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/adminlogin" element={<AdminLogin />} />
         {/*Admin*/}
-        <Route element={<ProtectedRoute role="admin" navigateRoute="/adminlogin" />}>
+        <Route element={<ProtectedRoute role={["admin"]} navigateRoute="/adminlogin" />}>
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="countries" element={<AdminCountry />} />

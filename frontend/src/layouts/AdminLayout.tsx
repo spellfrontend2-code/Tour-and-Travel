@@ -1,4 +1,4 @@
-import Sidebar from "@/components/Admin/Sidebar";
+import Sidebar from "@/components/Admin/Table/AdminShared/Sidebar";
 import { Outlet } from "react-router-dom";
 
 export default function AdminLayout(){
@@ -7,7 +7,7 @@ return (
         <aside className="w-[250px]">
             <Sidebar/>
         </aside>
-        <main className="p-15 w-full">
+        <main className="w-full">
             <Outlet/>
         </main>
     </div>
